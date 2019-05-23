@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Launcher extends Application {
+	public static BorderPane pane = new BorderPane();
 	Thread gc = new Thread(() -> {
 		while(true) {
 			try {
@@ -20,8 +21,7 @@ public class Launcher extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		gc.start();
-		BorderPane pane = new BorderPane();
-		Component.addMainComponent(pane);
+		new Component().addMainComponent(pane);
 		Scene scene = new Scene(pane, 650, 720);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
