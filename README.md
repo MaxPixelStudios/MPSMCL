@@ -1,4 +1,4 @@
-# PMCL
+# MPSMCL
 MaxPixel Studio's Minecraft Launcher  
 ### Launcher Version Naming Specification 启动器版本命名规范
 以这个做示例 For example: 0.1-a01  
