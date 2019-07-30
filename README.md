@@ -1,5 +1,5 @@
 # MPSMCL
-MaxPixel Studio's Minecraft Launcher  
+MaxPixel Studios' Minecraft Launcher  
 ### Launcher Version Naming Specification 启动器版本命名规范
 以这个做示例 For example: 0.1-a01  
 0为代, 0为早期开发代, 1为一代, 以此类推。0 is the generation, 0 is an early development generation, 1 is 1st generation, and so on.  
