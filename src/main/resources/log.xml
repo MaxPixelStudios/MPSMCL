@@ -4,7 +4,10 @@
 		<Console name="default" target="SYSTEM_OUT">
 			<PatternLayout pattern="%highlight{[%d{yyyy-MM-dd HH:mm:ss}] [%C{1}] [%c] [%p] %m%n}{FATAL=red, ERROR=bright red, WARN=yellow, INFO=bright black, DEBUG=bright white, TRACE=white}" />
 		</Console>
-		<File name="file" fileName="log/mpsmcl.log" append="true" bufferedIO="true" immediateFlush="true">
+		<File name="fileAll" fileName="log/mpsmclAll.log" append="true" bufferedIO="true" immediateFlush="true">
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%C{1}] [%c] [%p] %m%n" />
+		</File>
+		<File name="file" fileName="log/mpsmcl.log" append="false" bufferedIO="true" immediateFlush="true">
 			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%C{1}] [%c] [%p] %m%n" />
 		</File>
 	</Appenders>
@@ -12,6 +15,7 @@
 		<Root level="trace">
 			<AppenderRef ref="default"/>
 			<AppenderRef ref="file"/>
+			<AppenderRef ref="fileAll"/>
 		</Root>
 	</Loggers>
 </Configuration>

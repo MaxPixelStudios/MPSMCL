@@ -14,17 +14,18 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package cn.maxpixel.mpsmcl.game;
+
+package cn.maxpixel.mpsmcl;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class GameDirectory {
+public class LauncherSettings {
 	@Expose
-	private String path;
-	public static String getDefaultPath() {
-		return System.getProperty("user.home") + "\\AppData\\Roaming\\.mpsmcl";
-	}
-	public String getPath() {
-		return path;
+	@SerializedName("backgroundColor")
+	private float[] bgc;
+
+	public float[] getBackgroundColor() {
+		return bgc;
 	}
 }

@@ -1,9 +1,8 @@
 {
   "language" : "default",
-  "gameDirectories" : [
-    {
-
-    }
-  ],
-  "accounts" : []
+  "gameDirectories" : [],
+  "accounts" : [],
+  "launcherSettings": {
+    "backgroundColor": [255, 255, 255, 1]
+  }
 }

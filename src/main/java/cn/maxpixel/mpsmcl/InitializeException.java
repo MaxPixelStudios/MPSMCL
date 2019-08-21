@@ -14,17 +14,16 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package cn.maxpixel.mpsmcl.game;
+package cn.maxpixel.mpsmcl;
 
-import com.google.gson.annotations.Expose;
-
-public class GameDirectory {
-	@Expose
-	private String path;
-	public static String getDefaultPath() {
-		return System.getProperty("user.home") + "\\AppData\\Roaming\\.mpsmcl";
+public class InitializeException extends RuntimeException{
+	public InitializeException() {
+		super();
 	}
-	public String getPath() {
-		return path;
+	public InitializeException(String message) {
+		super(message);
+	}
+	public InitializeException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }

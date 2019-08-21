@@ -5,7 +5,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/src/main/resources/lib/netty-all-4.1.37.Final-sources.jar!/" />
+      <root url="jar://D:/APIs/netty-4.1.37.Final/jar/all-in-one/netty-all-4.1.37.Final-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
