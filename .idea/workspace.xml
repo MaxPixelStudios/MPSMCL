@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6b89927-59c1-4049-8a48-3d3ff37f34c6" name="Default Changelist" comment="" />
+    <list default="true" id="e6b89927-59c1-4049-8a48-3d3ff37f34c6" name="Default Changelist" comment="Task System Update">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/AsyncThreadOverflowException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/task/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/task/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/Launcher.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +28,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -33,10 +43,11 @@
   </component>
   <component name="ProjectId" id="1OXDn6RhOJ41a15NA0fYEXKXx00" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563806641003" />
-    <property name="last_opened_file_path" value="D:/intelliJ_idea-workspace/MaxPixel Studio Forum" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -166,11 +177,36 @@
       <workItem from="1566224786828" duration="599000" />
       <workItem from="1566295266155" duration="611000" />
       <workItem from="1566296501338" duration="10528000" />
+      <workItem from="1566398541039" duration="6331000" />
+      <workItem from="1566573752114" duration="596000" />
+      <workItem from="1566838206050" duration="1737000" />
+      <workItem from="1567167588545" duration="2080000" />
+      <workItem from="1567236202485" duration="6186000" />
+      <workItem from="1567350877353" duration="598000" />
+      <workItem from="1567773699978" duration="627000" />
+      <workItem from="1567832985846" duration="2231000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Task System Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Task System Update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

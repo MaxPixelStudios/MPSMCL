@@ -58,7 +58,7 @@ public class Launcher {
 			LogManager.getLogger("App Launcher").catching(Level.ERROR, e);
 		}
 	}
-	private static void init() throws Exception {
+	private static void init() {
 		LogManager.getLogger("App Launcher/Initialize").debug("Started initialize");
 		errorCallback = GLFWErrorCallback.createThrow().set();
 		LogManager.getLogger("App Launcher/Initialize").info("Created GLFW error callback throw");
@@ -130,5 +130,8 @@ public class Launcher {
 			icon.set(x.get(), y.get(), image);
 			return icon;
 		}
+	}
+	public static long getWindow() {
+		return window;
 	}
 }

@@ -18,9 +18,11 @@ package cn.maxpixel.mpsmcl;
 
 import cn.maxpixel.mpsmcl.task.Schedule;
 import cn.maxpixel.mpsmcl.ui.Launcher;
+import cn.maxpixel.mpsmcl.util.ArrayUtil;
 import cn.maxpixel.mpsmcl.util.Configuration;
 import cn.maxpixel.mpsmcl.util.Language;
 import org.apache.logging.log4j.LogManager;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +41,8 @@ public class Main {
 			LogManager.getLogger("Main/Fatal Error Report").fatal("Stack trace:");
 			StringWriter writer = new StringWriter();
 			e.printStackTrace(new PrintWriter(writer, true));
-			LogManager.getLogger("Main/Fatal Error Report").fatal(writer.toString());
+			writer.flush();
+			ArrayUtil.forEach(writer.toString().split("\n"), s -> LogManager.getLogger("Main/Fatal Error Report").fatal(s));
 			LogManager.getLogger("Main/Fatal Error Report").fatal("Please report this error to GitHub issue page: https://github.com/maxpixelstudio/MPSMCL/issues");
 			LogManager.getLogger("Main/Fatal Error Report").fatal("If this error caused by you modified the program yourself, please don't report this.");
 			LogManager.getLogger("Main/Fatal Error Report").fatal("-----------------------------------------------------");
@@ -61,9 +64,7 @@ public class Main {
 		Schedule.getSchedule().then(() -> {
 			LogManager.getLogger("Main").debug("Checking for updates...");
 
-		}).then(() -> {
-
-		}).toThread().start();
+		}).runThread();
 		Launcher.main(args);
 	}
 	public static void restart() {
@@ -72,6 +73,6 @@ public class Main {
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
-		System.exit(0);
+		GLFW.glfwSetWindowShouldClose(Launcher.getWindow(), true);
 	}
 }
