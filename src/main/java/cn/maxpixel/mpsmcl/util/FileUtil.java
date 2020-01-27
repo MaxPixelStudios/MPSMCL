@@ -33,17 +33,12 @@ public class FileUtil {
 		if((!checkExists(fileName)) || override) {
 			LogManager.getLogger("File Utilities/Create New File").trace("File not exists or override is true, creating file...");
 			try {
-				FileOutputStream target = new FileOutputStream(fileName);
 				LogManager.getLogger("File Utilities/Create New File").trace("Writing file...");
-				int i;
-				while((i = resource.read()) != -1) {
-					target.write(i);
-					target.flush();
-
+				try(FileOutputStream target = new FileOutputStream(fileName)) {
+					for (int i = resource.read(); i != -1; i = resource.read()) target.write(i);
+					LogManager.getLogger("File Utilities/Create New File").trace("IO stream closing...");
+					resource.close();
 				}
-				LogManager.getLogger("File Utilities/Create New File").trace("IO stream closing...");
-				target.close();
-				resource.close();
 				LogManager.getLogger("File Utilities/Create New File").debug("IO stream closed");
 				LogManager.getLogger("File Utilities/Create New File").info(fileName + " successful created");
 				return true;
@@ -58,7 +53,7 @@ public class FileUtil {
 		}
 	}
 	public static String readStringFromStream(InputStream stream) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		try {
 			LogManager.getLogger("File Utilities/Read File").info("Reading file");
 			int i;

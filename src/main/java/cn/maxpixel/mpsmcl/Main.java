@@ -22,18 +22,16 @@ import cn.maxpixel.mpsmcl.util.ArrayUtil;
 import cn.maxpixel.mpsmcl.util.Configuration;
 import cn.maxpixel.mpsmcl.util.Language;
 import org.apache.logging.log4j.LogManager;
-import org.lwjgl.glfw.GLFW;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URISyntaxException;
+import javax.swing.*;
+import java.io.*;
 
 public class Main {
 	public static Configuration configuration;
 	public static Language lang;
+	public static Launcher launcher;
 	static {
+		System.setProperty("log4j2.skipJansi", "false");
 		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
 			LogManager.getLogger("Main/Fatal Error Report").fatal("-----------------------------------------------------");
 			LogManager.getLogger("Main/Fatal Error Report").fatal("MaxPixel Studio's Minecraft Launcher has stopped because of a fatal error occur");
@@ -42,16 +40,24 @@ public class Main {
 			StringWriter writer = new StringWriter();
 			e.printStackTrace(new PrintWriter(writer, true));
 			writer.flush();
-			ArrayUtil.forEach(writer.toString().split("\n"), s -> LogManager.getLogger("Main/Fatal Error Report").fatal(s));
-			LogManager.getLogger("Main/Fatal Error Report").fatal("Please report this error to GitHub issue page: https://github.com/maxpixelstudio/MPSMCL/issues");
+			ArrayUtil.forEach(writer.toString().split("\n"), LogManager.getLogger("Main/Fatal Error Report")::fatal);
+			LogManager.getLogger("Main/Fatal Error Report").fatal("Please report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues");
 			LogManager.getLogger("Main/Fatal Error Report").fatal("If this error caused by you modified the program yourself, please don't report this.");
 			LogManager.getLogger("Main/Fatal Error Report").fatal("-----------------------------------------------------");
+			JOptionPane.showMessageDialog(null, "MaxPixel Studio's Minecraft Launcher has stopped because of a fatal error occur" +
+					"\nStacktrace: \n" + e + "\nPlease report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues\n" +
+					"If this error caused by you modified the program yourself, please don't report.", "MPSMCL FATAL ERROR REPORT",
+					JOptionPane.ERROR_MESSAGE);
 		});
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> LogManager.getLogger("App Launcher").traceExit()));
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			File temp = new File(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource");
+			if(temp.listFiles() != null) ArrayUtil.forEach(temp.listFiles(), File::delete);
+			temp.delete();
+			LogManager.getLogger("App Launcher").debug("Temp file deleted");
+			LogManager.getLogger("App Launcher").traceExit();
+		}, "Shutdown Thread"));
 	}
 	public static void main(String[] args) {
-		System.setProperty("log4j.configurationFile", "log.xml");
-		System.setProperty("log4j.skipJansi", "false");
 		LogManager.getLogger("Main").info("--------------------");
 		LogManager.getLogger("Main").info("MaxPixel Studios' Minecraft Launcher Starting...");
 		LogManager.getLogger("Main").info("Launcher Version: " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
@@ -60,19 +66,13 @@ public class Main {
 		configuration = Configuration.loadConfiguration();
 		LogManager.getLogger("Main").trace("Loaded configuration");
 		lang = new Language();
+		LogManager.getLogger("Main").trace("Loaded language");
 		LogManager.getLogger("Main").debug("Running start task");
-		Schedule.getSchedule().then(() -> {
+		Schedule.getSchedule().add(() -> {
 			LogManager.getLogger("Main").debug("Checking for updates...");
 
 		}).runThread();
-		Launcher.main(args);
-	}
-	public static void restart() {
-		try {
-			Runtime.getRuntime().exec("java -jar " + new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath());
-		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
-		GLFW.glfwSetWindowShouldClose(Launcher.getWindow(), true);
+		launcher = new Launcher();
+		launcher.run();
 	}
 }

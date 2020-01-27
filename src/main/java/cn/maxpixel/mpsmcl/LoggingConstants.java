@@ -17,14 +17,9 @@
 
 package cn.maxpixel.mpsmcl;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-public class LauncherSettings {
-	@Expose
-	private float[] backgroundColor;
-
-	public float[] getBackgroundColor() {
-		return backgroundColor;
-	}
+public interface LoggingConstants {
+	String SLASH = "/";
+	/* App Launcher Constants */
+	String APP_LAUNCHER = "App Launcher";
+	String LOAD_IMAGE = "Load Image";
 }

@@ -21,7 +21,6 @@ import cn.maxpixel.mpsmcl.AsyncThreadOverflowException;
 import cn.maxpixel.mpsmcl.util.ArrayUtil;
 import org.apache.logging.log4j.LogManager;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -29,29 +28,35 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
+import static cn.maxpixel.mpsmcl.LoggingConstants.*;
+
 public class Schedule {
-	private static int count = 0;
-	private static int index = 0;
-	private static ArrayList<Task> tasks;
+	private int count;
+	private int index;
+	private ArrayList<Task> tasks;
 	private String name;
 	private Schedule(String name) {
-		LogManager.getLogger("Task System/Schedule").debug("Schedule initializing");
+		LogManager.getLogger("Task System/Schedule").trace("Schedule initializing");
 		tasks = new ArrayList<>();
 		this.name = name;
+		this.count = 0;
+		this.index = 0;
 	}
 	public static Schedule getSchedule() {
-		StringBuffer sb = new StringBuffer(40);
+		StringBuilder sb = new StringBuilder(40);
 		try {
-			ArrayUtil.forEach(MessageDigest.getInstance("SHA-1").digest(Long.toString(new Random().nextLong()).getBytes(StandardCharsets.UTF_8)), (t) -> {
+			ArrayUtil.forEach(MessageDigest.getInstance("SHA-1").digest(Long.toString(new Random().nextLong()).getBytes(StandardCharsets.UTF_16BE)), t -> {
 				if(Byte.toUnsignedInt(t) < 16) sb.append("0");
 				sb.append(Integer.toHexString(Byte.toUnsignedInt(t)));
 			});
-		} catch (NoSuchAlgorithmException e) {}
+		} catch (NoSuchAlgorithmException e) {
+
+		}
 		return new Schedule(sb.toString());
 	}
-	public Schedule then(Task t) {
+	public Schedule add(Task t) {
 		tasks.add(count++, Objects.requireNonNull(t));
-		LogManager.getLogger("Task System/Schedule").debug("Added task");
+		LogManager.getLogger("Task System/Schedule").trace("Added task");
 		return this;
 	}
 	public void runThread() {
@@ -67,31 +72,20 @@ public class Schedule {
 		else if(tcount < 2) throw new AsyncThreadOverflowException("Asynchronous thread count could not less than 2");
 		else {
 			int threadNumber = 0;
-			ThreadGroup asyncThreads = new ThreadGroup("Asynchronous Threads");
+			ThreadGroup asyncThreads = new ThreadGroup("Asynchronous Task Threads");
 			int tpt = count / tcount; // task per thread
-			if((count - tpt * tcount) > 0) new Thread(asyncThreads, "Asynchronous Thread" + threadNumber++) {
+			if((count - tpt * tcount) > 0) new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
 				@Override
 				public void run() {
-					do {
-						tasks.get(index++).execute();
-					} while(index < (count - tpt * tcount));
+					do tasks.get(index++).execute(); while(index < (count - tpt * tcount));
 				}
 			}.start();
-			while(index < count) {
-				new Thread(asyncThreads, "Asynchronous Thread" + threadNumber++) {
+			do new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
 					@Override
 					public void run() {
-						for(int i = 0; i < tpt; ++i) {
-							tasks.get(index++).execute();
-						}
+						for(int i = 0; i < tpt; ++i) tasks.get(index++).execute();
 					}
-				}.start();
-				try {
-					Thread.sleep(0, 1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
+			}.start(); while(threadNumber <= tcount);
 		}
 	}
 }

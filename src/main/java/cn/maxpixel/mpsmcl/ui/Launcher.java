@@ -19,64 +19,62 @@ package cn.maxpixel.mpsmcl.ui;
 import cn.maxpixel.mpsmcl.Info;
 import cn.maxpixel.mpsmcl.InitializeException;
 import cn.maxpixel.mpsmcl.Main;
-import cn.maxpixel.mpsmcl.util.FileUtil;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
-import org.lwjgl.glfw.Callbacks;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWImage;
-import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.system.Callback;
-import org.lwjgl.system.MemoryStack;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.stb.STBImage.stbi_load;
-import static org.lwjgl.system.MemoryStack.stackPush;
-import static org.lwjgl.system.MemoryUtil.NULL;
+import static org.lwjgl.stb.STBImage.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static cn.maxpixel.mpsmcl.LoggingConstants.*;
 
 public class Launcher {
-	private static long window;
-	private static Callback GLdebugProc;
-	private static GLFWErrorCallback errorCallback;
+	private long window;
+	private Callback GLdebugProc;
+	private GLFWErrorCallback errorCallback;
+	public static GLCapabilities capabilities;
 
-	public static void main(String[] args) {
+	public void run() {
 		LogManager.getLogger("App Launcher").info("Launching Application");
-		new File(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource").mkdirs();
-		FileUtil.createNewFileFromStream(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource/icon.png", Launcher.class.getResourceAsStream("/icon/icon.png"));
 		try {
 			init();
 			loop();
 			destroy();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			LogManager.getLogger("App Launcher").catching(Level.ERROR, e);
 		}
 	}
-	private static void init() {
-		LogManager.getLogger("App Launcher/Initialize").debug("Started initialize");
+	private void init() {
+		LogManager.getLogger("App Launcher/Initialize").debug("Releasing files");
+		new File(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource").mkdirs();
+		LogManager.getLogger("App Launcher/Initialize").info("Started initialize");
 		errorCallback = GLFWErrorCallback.createThrow().set();
-		LogManager.getLogger("App Launcher/Initialize").info("Created GLFW error callback throw");
+		LogManager.getLogger("App Launcher/Initialize").trace("Created GLFW error callback throw");
 		if(!glfwInit()) throw new InitializeException("GLFW initialize failed", new RuntimeException("Initialize error"));
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+		if(Platform.get() == Platform.MACOSX) glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		LogManager.getLogger("App Launcher/Initialize").trace("Window hints has been set");
 		window = glfwCreateWindow(650, 720,
 				Info.NAME + " version " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""), NULL, NULL);
-		LogManager.getLogger("App Launcher/Initialize").trace("Created window");
-		glfwSetWindowIcon(window, GLFWImage.malloc(1).put(0, load_image(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource/icon.png")));
-		LogManager.getLogger("App Launcher/Initialize").trace("Window icon has been set");
 		if(window == NULL) {
 			glfwTerminate();
 			throw new InitializeException("Window created failed", new RuntimeException("Failed to create GLFW window"));
 		}
+		LogManager.getLogger("App Launcher/Initialize").trace("Created window");
+		glfwSetWindowIcon(window, GLFWImage.malloc(1).put(0, loadImage("icon/icon.png")));
+		LogManager.getLogger("App Launcher/Initialize").trace("Window icon set");
 		try(MemoryStack stack = stackPush()) {
 			IntBuffer wWidth = stack.callocInt(1);
 			IntBuffer wHeight = stack.callocInt(1);
@@ -85,22 +83,23 @@ public class Launcher {
 			glfwSetWindowPos(window,
 					(vidMode.width() - wWidth.get()) / 2,
 					(vidMode.height() - wHeight.get()) / 2);
-			LogManager.getLogger("App Launcher/Initialize").trace("Window position has been set");
+			LogManager.getLogger("App Launcher/Initialize").trace("Window position set");
+			glfwShowWindow(window);
 		}
 		glfwMakeContextCurrent(window);
 		LogManager.getLogger("App Launcher/Initialize").trace("Make window context current");
 		glfwSwapInterval(1);
-		LogManager.getLogger("App Launcher/Initialize").debug("V-Sync enabled");
-		GL.createCapabilities();
+		LogManager.getLogger("App Launcher/Initialize").info("V-Sync enabled");
+		capabilities = GL.createCapabilities();
 		LogManager.getLogger("App Launcher/Initialize").trace("Capabilities created");
 		GLdebugProc = GLUtil.setupDebugMessageCallback();
-		LogManager.getLogger("App Launcher/Initialize").info("OpenGL debug message callback created");
+		LogManager.getLogger("App Launcher/Initialize").trace("OpenGL debug message callback created");
 		glfwSetFramebufferSizeCallback(window, (window1, width, height) -> glViewport(0, 0, width, height));
 		LogManager.getLogger("App Launcher/Initialize").trace("GLFW frame buffer size callback has been set");
-		float rgba[] = Main.configuration.getLauncherSettings().getBackgroundColor();
+		float[] rgba = Main.configuration.getLauncherSettings().getBackgroundColor();
 		glClearColor(rgba[0], rgba[1], rgba[2],rgba[3]);
 	}
-	private static void loop() {
+	private void loop() {
 		while(!glfwWindowShouldClose(window)) {
 			glClear(GL_COLOR_BUFFER_BIT);
 
@@ -108,7 +107,7 @@ public class Launcher {
 			glfwPollEvents();
 		}
 	}
-	private static void destroy() {
+	private void destroy() {
 		if(GLdebugProc != null) GLdebugProc.free();
 		Callbacks.glfwFreeCallbacks(window);
 		glfwDestroyWindow(window);
@@ -117,21 +116,26 @@ public class Launcher {
 		LogManager.getLogger("App Launcher/Close").trace("Terminated GLFW");
 		errorCallback.free();
 		LogManager.getLogger("App Launcher/Close").trace("Callbacks released");
-		LogManager.getLogger("App Launcher").info("--------------------");
-		LogManager.getLogger("App Launcher").info("Exiting MaxPixel Studio's Minecraft Launcher");
-		LogManager.getLogger("App Launcher").info("--------------------");
+		LogManager.getLogger(APP_LAUNCHER).info("--------------------");
+		LogManager.getLogger(APP_LAUNCHER).info("Exiting MaxPixel Studio's Minecraft Launcher");
+		LogManager.getLogger(APP_LAUNCHER).info("--------------------");
 	}
-	private static GLFWImage load_image(String path) {
+	private static GLFWImage loadImage(String path) {
+		LogManager.getLogger(APP_LAUNCHER + SLASH + LOAD_IMAGE).trace("Loading Image");
 		try(MemoryStack stack = stackPush()) {
 			GLFWImage icon = GLFWImage.mallocStack(stack);
 			IntBuffer x = stack.callocInt(1);
 			IntBuffer y = stack.callocInt(1);
-			ByteBuffer image = stbi_load(path, x, y, stack.callocInt(1), 4);
+			ByteBuffer image = stbi_load(new File(Launcher.class.getClassLoader().getResource(path).toURI()).getAbsolutePath(), x, y, stack.callocInt(1), 4);
 			icon.set(x.get(), y.get(), image);
+			LogManager.getLogger(APP_LAUNCHER + SLASH + LOAD_IMAGE).debug("Loaded Image");
 			return icon;
+		} catch (URISyntaxException e) {
+			LogManager.getLogger(APP_LAUNCHER + SLASH + LOAD_IMAGE).error("Couldn't load the image!\nStacktrace: {}", e);
 		}
+		return null;
 	}
-	public static long getWindow() {
+	public long getWindow() {
 		return window;
 	}
 }

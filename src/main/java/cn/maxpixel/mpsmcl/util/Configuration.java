@@ -50,7 +50,7 @@ public class Configuration {
 		try {
 			FileUtil.createNewFileFromStream("config.json", Configuration.class.getResourceAsStream("/default-config.json"));
 			fr = new FileReader("config.json");
-			LogManager.getLogger("Launcher Configuration/Load Configuration").debug("Creating configuration");
+			LogManager.getLogger("Launcher Configuration/Load Configuration").debug("Loading configuration");
 			return json.fromJson(fr, Configuration.class);
 		} catch (FileNotFoundException e) {
 			LogManager.getLogger("Launcher Configuration/Exception caught").fatal("Configuration file not found!");

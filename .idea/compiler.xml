@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mpsmcl" />
         <module name="MaxPixel Studio's Minecraft Launcher" />
+        <module name="MPSMCL" />
+        <module name="mpsmcl" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

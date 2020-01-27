@@ -17,6 +17,7 @@
 package cn.maxpixel.mpsmcl.util;
 
 import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
 public class ArrayUtil {
 	public static <T> void forEach(T[] arr, Consumer<? super T> method) {
@@ -34,7 +35,7 @@ public class ArrayUtil {
 			method.accept(s);
 		}
 	}
-	public static void forEach(int[] arr, Consumer<? super Integer> method) {
+	public static void forEach(int[] arr, IntConsumer method) {
 		for(int i : arr) {
 			method.accept(i);
 		}
