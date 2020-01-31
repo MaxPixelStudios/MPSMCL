@@ -3,6 +3,7 @@
   "gameDirectories" : [],
   "accounts" : [],
   "launcherSettings": {
-    "backgroundColor": [255, 255, 255, 1]
+    "backgroundColor": [255, 255, 255, 1],
+    "renderer": "OPENGL"
   }
 }

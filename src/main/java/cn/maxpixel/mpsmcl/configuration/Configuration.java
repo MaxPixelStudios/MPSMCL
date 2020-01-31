@@ -14,10 +14,10 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package cn.maxpixel.mpsmcl.util;
+package cn.maxpixel.mpsmcl.configuration;
 
-import cn.maxpixel.mpsmcl.LauncherSettings;
 import cn.maxpixel.mpsmcl.game.GameDirectory;
+import cn.maxpixel.mpsmcl.util.FileUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -30,7 +30,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Configuration {
-	private static Gson json = new GsonBuilder()
+	public static Gson json = new GsonBuilder()
 			.setPrettyPrinting()
 			.serializeNulls()
 			.excludeFieldsWithoutExposeAnnotation()
@@ -41,16 +41,16 @@ public class Configuration {
 	private String lang;
 	@SerializedName("gameDirectories")
 	@Expose
-	private ArrayList<GameDirectory> gameDir;
+	private ArrayList<GameDirectory> gameDirs;
 	@Expose
 	@SerializedName("launcherSettings")
-	private LauncherSettings setting;
+	private LauncherSettings settings;
 	public static Configuration loadConfiguration() {
 		FileReader fr = null;
 		try {
 			FileUtil.createNewFileFromStream("config.json", Configuration.class.getResourceAsStream("/default-config.json"));
 			fr = new FileReader("config.json");
-			LogManager.getLogger("Launcher Configuration/Load Configuration").debug("Loading configuration");
+			LogManager.getLogger("Launcher Configuration/Load Configuration").trace("Loading configuration");
 			return json.fromJson(fr, Configuration.class);
 		} catch (FileNotFoundException e) {
 			LogManager.getLogger("Launcher Configuration/Exception caught").fatal("Configuration file not found!");
@@ -63,10 +63,10 @@ public class Configuration {
 		return lang;
 	}
 	public ArrayList<GameDirectory> getGameDirectories() {
-		return gameDir;
+		return gameDirs;
 	}
 	public LauncherSettings getLauncherSettings() {
-		return setting;
+		return settings;
 	}
 	public static void resetConfiguration() {
 		LogManager.getLogger("Launcher Configuration/Reset Configuration").debug("Resetting configuration");

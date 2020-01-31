@@ -15,22 +15,14 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl;
+package cn.maxpixel.mpsmcl.ui.renderer.javafx;
 
-public interface LoggingConstants {
-	String SLASH = "/"; // '/'
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-	/* Main Constants */
-	String MAIN = "Main";
-	String FATAL_ERROR_REPORT = "Fatal Error Report";
+public class JFXApp extends Application {
+	@Override
+	public void start(Stage primaryStage) {
 
-	/* App Launcher Constants */
-	String APP_LAUNCHER = "App Launcher";
-
-	/* Window Constants */
-	String CLOSE = "Close";
-
-	/* OpenGL Window Constants */
-	String OPENGL_WINDOW_RENDERER = "OpenGL Window Renderer";
-	String LOAD_IMAGE = "Load Image";
+	}
 }

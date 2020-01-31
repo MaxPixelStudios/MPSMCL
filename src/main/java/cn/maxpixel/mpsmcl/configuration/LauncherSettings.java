@@ -15,22 +15,25 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl;
+package cn.maxpixel.mpsmcl.configuration;
 
-public interface LoggingConstants {
-	String SLASH = "/"; // '/'
+import com.google.gson.annotations.Expose;
 
-	/* Main Constants */
-	String MAIN = "Main";
-	String FATAL_ERROR_REPORT = "Fatal Error Report";
+public class LauncherSettings {
+	@Expose
+	private float[] backgroundColor;
+	@Expose
+	private Renderer renderer;
+	public float[] getBackgroundColor() {
+		return backgroundColor;
+	}
+	public Renderer getRenderer() {
+		return renderer;
+	}
 
-	/* App Launcher Constants */
-	String APP_LAUNCHER = "App Launcher";
 
-	/* Window Constants */
-	String CLOSE = "Close";
-
-	/* OpenGL Window Constants */
-	String OPENGL_WINDOW_RENDERER = "OpenGL Window Renderer";
-	String LOAD_IMAGE = "Load Image";
+	public enum Renderer {
+		OPENGL,
+		JAVAFX
+	}
 }

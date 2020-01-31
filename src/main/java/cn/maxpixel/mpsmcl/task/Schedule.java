@@ -59,33 +59,42 @@ public class Schedule {
 		LogManager.getLogger("Task System/Schedule").trace("Added task");
 		return this;
 	}
-	public void runThread() {
-		new Thread("Schedule " + name) {
+	public Thread getThread() {
+		return new Thread("Schedule " + name) {
 			public void run() {
 				LogManager.getLogger("Task System/Schedule").debug("Started running tasks");
 				tasks.forEach(Task::execute);
 			}
-		}.start();
+		};
 	}
-	public void runAsynchronousThread(int tcount) {
+	public void runThread() {
+		getThread().start();
+	}
+	public Thread[] getAsynchronousThread(int tcount) {
 		if(count < tcount) throw new AsyncThreadOverflowException("Asynchronous thread count more than task count");
 		else if(tcount < 2) throw new AsyncThreadOverflowException("Asynchronous thread count could not less than 2");
 		else {
 			int threadNumber = 0;
 			ThreadGroup asyncThreads = new ThreadGroup("Asynchronous Task Threads");
+			ArrayList<Thread> threads = new ArrayList<>();
 			int tpt = count / tcount; // task per thread
-			if((count - tpt * tcount) > 0) new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
+			if((count - tpt * tcount) > 0) threads.add(new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
 				@Override
 				public void run() {
 					do tasks.get(index++).execute(); while(index < (count - tpt * tcount));
 				}
-			}.start();
-			do new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
-					@Override
-					public void run() {
-						for(int i = 0; i < tpt; ++i) tasks.get(index++).execute();
-					}
-			}.start(); while(threadNumber <= tcount);
+			});
+			do threads.add(new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
+				@Override
+				public void run() {
+					for(int i = 0; i < tpt; ++i) tasks.get(index++).execute();
+				}
+			}); while(threadNumber <= tcount);
+
+			return threads.toArray(new Thread[1]);
 		}
+	}
+	public void runAsynchronousThread(int tcount) {
+		ArrayUtil.forEach(getAsynchronousThread(tcount), Thread::start);
 	}
 }

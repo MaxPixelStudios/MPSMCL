@@ -19,12 +19,14 @@ package cn.maxpixel.mpsmcl;
 import cn.maxpixel.mpsmcl.task.Schedule;
 import cn.maxpixel.mpsmcl.ui.Launcher;
 import cn.maxpixel.mpsmcl.util.ArrayUtil;
-import cn.maxpixel.mpsmcl.util.Configuration;
+import cn.maxpixel.mpsmcl.configuration.Configuration;
 import cn.maxpixel.mpsmcl.util.Language;
 import org.apache.logging.log4j.LogManager;
 
 import javax.swing.*;
 import java.io.*;
+
+import static cn.maxpixel.mpsmcl.LoggingConstants.*;
 
 public class Main {
 	public static Configuration configuration;
@@ -33,10 +35,10 @@ public class Main {
 	static {
 		System.setProperty("log4j2.skipJansi", "false");
 		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-			LogManager.getLogger("Main/Fatal Error Report").fatal("-----------------------------------------------------");
-			LogManager.getLogger("Main/Fatal Error Report").fatal("MaxPixel Studio's Minecraft Launcher has stopped because of a fatal error occur");
-			LogManager.getLogger("Main/Fatal Error Report").fatal("Error thread: " + t.getName());
-			LogManager.getLogger("Main/Fatal Error Report").fatal("Stack trace:");
+			LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT).fatal("-----------------------------------------------------");
+			LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT).fatal("MaxPixel Studio's Minecraft Launcher has stopped because of a fatal error occur");
+			LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT).fatal("Error thread: " + t.getName());
+			LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT).fatal("Stack trace:");
 			StringWriter writer = new StringWriter();
 			e.printStackTrace(new PrintWriter(writer, true));
 			writer.flush();
@@ -53,23 +55,24 @@ public class Main {
 			File temp = new File(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource");
 			if(temp.listFiles() != null) ArrayUtil.forEach(temp.listFiles(), File::delete);
 			temp.delete();
-			LogManager.getLogger("App Launcher").debug("Temp file deleted");
-			LogManager.getLogger("App Launcher").traceExit();
+			LogManager.getLogger(APP_LAUNCHER).debug("Temp file deleted");
+			LogManager.getLogger(APP_LAUNCHER).traceExit();
 		}, "Shutdown Thread"));
 	}
 	public static void main(String[] args) {
-		LogManager.getLogger("Main").info("--------------------");
-		LogManager.getLogger("Main").info("MaxPixel Studios' Minecraft Launcher Starting...");
-		LogManager.getLogger("Main").info("Launcher Version: " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
-		LogManager.getLogger("Main").info("OS: " + System.getProperty("os.arch") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
-		LogManager.getLogger("Main").info("--------------------");
+		LogManager.getLogger(MAIN).info("--------------------");
+		LogManager.getLogger(MAIN).info("MaxPixel Studios' Minecraft Launcher Starting...");
+		LogManager.getLogger(MAIN).info("Launcher Version: " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
+		LogManager.getLogger(MAIN).info("OS: " + System.getProperty("os.arch") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+		LogManager.getLogger(MAIN).info("--------------------");
+		Configuration.resetConfiguration();
 		configuration = Configuration.loadConfiguration();
-		LogManager.getLogger("Main").trace("Loaded configuration");
+		LogManager.getLogger(MAIN).debug("Loaded configuration");
 		lang = new Language();
-		LogManager.getLogger("Main").trace("Loaded language");
-		LogManager.getLogger("Main").debug("Running start task");
+		LogManager.getLogger(MAIN).trace("Loaded language");
+		LogManager.getLogger(MAIN).debug("Running start task");
 		Schedule.getSchedule().add(() -> {
-			LogManager.getLogger("Main").debug("Checking for updates...");
+			LogManager.getLogger(MAIN).debug("Checking for updates...");
 
 		}).runThread();
 		launcher = new Launcher();

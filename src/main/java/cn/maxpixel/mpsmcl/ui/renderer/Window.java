@@ -15,22 +15,26 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl;
+package cn.maxpixel.mpsmcl.ui.renderer;
 
-public interface LoggingConstants {
-	String SLASH = "/"; // '/'
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWVidMode;
 
-	/* Main Constants */
-	String MAIN = "Main";
-	String FATAL_ERROR_REPORT = "Fatal Error Report";
-
-	/* App Launcher Constants */
-	String APP_LAUNCHER = "App Launcher";
-
-	/* Window Constants */
-	String CLOSE = "Close";
-
-	/* OpenGL Window Constants */
-	String OPENGL_WINDOW_RENDERER = "OpenGL Window Renderer";
-	String LOAD_IMAGE = "Load Image";
+public abstract class Window {
+	static {
+		if(GLFW.glfwInit()) {
+			GLFWVidMode vidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
+			width = vidMode.width() / 2;
+			height = vidMode.height() / 2;
+			GLFW.glfwTerminate();
+		} else {
+			width = 854;
+			height = 480;
+		}
+	}
+	public static boolean running = false;
+	protected static int width, height;
+	public abstract void init() throws Exception;
+	public abstract void run() throws Exception;
+	protected abstract void close() throws Exception;
 }
