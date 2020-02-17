@@ -19,6 +19,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
 				<configuration>
 					<source>8</source>
 					<target>8</target>
@@ -26,24 +27,25 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.1.1</version>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.2</version>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<mainClass>cn.maxpixel.mpsmcl.Main</mainClass>
-						</manifest>
-					</archive>
+					<transformers>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<manifestEntries>
+								<Main-Class>cn.maxpixel.mpsmcl.Main</Main-Class>
+							</manifestEntries>
+						</transformer>
+					</transformers>
+					<outputDirectory>${basedir}\target\</outputDirectory>
+					<outputFile>MPSMCL-${project.version}.jar</outputFile>
 				</configuration>
 				<executions>
 					<execution>
-						<id>make-assembly</id>
+						<id>shade</id>
 						<phase>install</phase>
 						<goals>
-							<goal>single</goal>
+							<goal>shade</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -104,46 +106,6 @@
 		<dependency>
 			<groupId>org.lwjgl</groupId>
 			<artifactId>lwjgl</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-driftfx</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-glfw</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-nfd</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-nuklear</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-opengl</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-rpmalloc</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-stb</artifactId>
-			<classifier>natives-linux-arm64</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl</artifactId>
 			<classifier>natives-linux</classifier>
 		</dependency>
 		<dependency>
@@ -180,46 +142,6 @@
 			<groupId>org.lwjgl</groupId>
 			<artifactId>lwjgl-stb</artifactId>
 			<classifier>natives-linux</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl</artifactId>
-			<classifier>natives-linux-arm32</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-driftfx</artifactId>
-			<classifier>natives-linux-arm32</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-glfw</artifactId>
-			<classifier>natives-linux-arm32</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-nfd</artifactId>
-			<classifier>natives-linux-arm32</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-nuklear</artifactId>
-			<classifier>natives-linux-arm32</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-opengl</artifactId>
-			<classifier>natives-linux-arm32</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-rpmalloc</artifactId>
-			<classifier>natives-linux-arm32</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-stb</artifactId>
-			<classifier>natives-linux-arm32</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.lwjgl</groupId>
@@ -359,7 +281,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.1.45</version>
+			<version>4.1.45.Final</version>
 		</dependency>
 	</dependencies>
 </project>

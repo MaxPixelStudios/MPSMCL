@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -19,22 +19,28 @@ package cn.maxpixel.mpsmcl.ui.renderer.javafx;
 
 import cn.maxpixel.mpsmcl.ui.renderer.Window;
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+
+import static cn.maxpixel.mpsmcl.LoggingConstants.*;
 
 public class JFXWindow extends Window {
 	private JFXApp window = new JFXApp();
 	@Override
 	public void init() throws Exception {
-		Application.launch(window.getClass());
+		LogManager.getLogger(JAVAFX_WINDOW_RENDERER + SLASH + INITIALIZE).info("Started initialize");
 	}
 
 	@Override
 	public void run() throws Exception {
-
+		Application.launch(window.getClass());
 		while(running) {}
 		close();
 	}
 
 	@Override
-	protected void close() throws Exception {}
+	protected void close() throws Exception {
+		Window.running = false;
+		LogManager.getLogger(JAVAFX_WINDOW_RENDERER).debug("Closed window");
+	}
 }

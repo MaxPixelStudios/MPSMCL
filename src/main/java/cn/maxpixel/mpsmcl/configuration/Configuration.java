@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -29,12 +29,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import static cn.maxpixel.mpsmcl.LoggingConstants.*;
+
 public class Configuration {
 	public static Gson json = new GsonBuilder()
 			.setPrettyPrinting()
 			.serializeNulls()
 			.excludeFieldsWithoutExposeAnnotation()
 			.setDateFormat("yyyy/MM/dd HH:mm:ss")
+			.enableComplexMapKeySerialization()
 			.create();
 	@SerializedName("language")
 	@Expose()
@@ -43,18 +46,22 @@ public class Configuration {
 	@Expose
 	private ArrayList<GameDirectory> gameDirs;
 	@Expose
+	private ArrayList<Account> accounts;
+	@Expose
 	@SerializedName("launcherSettings")
 	private LauncherSettings settings;
+	@Expose
+	private String clientToken;
 	public static Configuration loadConfiguration() {
 		FileReader fr = null;
 		try {
 			FileUtil.createNewFileFromStream("config.json", Configuration.class.getResourceAsStream("/default-config.json"));
 			fr = new FileReader("config.json");
-			LogManager.getLogger("Launcher Configuration/Load Configuration").trace("Loading configuration");
+			LogManager.getLogger(CONFIGURATION + SLASH + LOAD).debug("Loading configuration");
 			return json.fromJson(fr, Configuration.class);
 		} catch (FileNotFoundException e) {
-			LogManager.getLogger("Launcher Configuration/Exception caught").fatal("Configuration file not found!");
-			LogManager.getLogger("Launcher Configuration/Exception caught").catching(Level.FATAL, e);
+			LogManager.getLogger(CONFIGURATION + SLASH + EXCEPTION_CAUGHT).fatal("Configuration file not found!");
+			LogManager.getLogger(CONFIGURATION + SLASH + EXCEPTION_CAUGHT).catching(Level.FATAL, e);
 			FileUtil.createNewFileFromStream("config.json", Configuration.class.getResourceAsStream("/default-config.json"));
 			return json.fromJson(fr, Configuration.class);
 		}
@@ -65,11 +72,17 @@ public class Configuration {
 	public ArrayList<GameDirectory> getGameDirectories() {
 		return gameDirs;
 	}
+	public ArrayList<Account> getAccounts() {
+		return accounts;
+	}
 	public LauncherSettings getLauncherSettings() {
 		return settings;
 	}
+	public static void saveConfiguration(Configuration configuration) {
+		LogManager.getLogger(CONFIGURATION + SLASH + SAVE).debug("Saving configuration");
+	}
 	public static void resetConfiguration() {
-		LogManager.getLogger("Launcher Configuration/Reset Configuration").debug("Resetting configuration");
+		LogManager.getLogger(CONFIGURATION + SLASH + RESET).debug("Resetting configuration");
 		FileUtil.createNewFileFromStream("config.json", Configuration.class.getResourceAsStream("/default-config.json"), true);
 	}
 }

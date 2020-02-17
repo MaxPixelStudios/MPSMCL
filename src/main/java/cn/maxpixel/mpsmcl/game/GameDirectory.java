@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -21,9 +21,6 @@ import com.google.gson.annotations.Expose;
 public class GameDirectory {
 	@Expose
 	private String path;
-	public static String getDefaultPath() {
-		return System.getProperty("user.home") + "\\AppData\\Roaming\\.mpsmcl";
-	}
 	public String getPath() {
 		return path;
 	}

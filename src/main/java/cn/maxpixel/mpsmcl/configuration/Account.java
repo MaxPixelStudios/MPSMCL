@@ -15,19 +15,37 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl;
+package cn.maxpixel.mpsmcl.configuration;
 
-public class AsyncThreadOverflowException extends RuntimeException {
-	public AsyncThreadOverflowException() {
-		super();
+import com.google.gson.annotations.Expose;
+
+public class Account {
+	public enum AccountType {
+		MOJANG,
+		OFFLINE
 	}
-	public AsyncThreadOverflowException(String message) {
-		super(message);
+	@Expose
+	private AccountType type;
+	@Expose
+	private String username;
+	@Expose
+	private String email;
+	@Expose
+	private String accessToken;
+
+	public AccountType getAccountType() {
+		return type;
 	}
-	public AsyncThreadOverflowException(Throwable cause) {
-		super(cause);
+
+	public String getUsername() {
+		return username;
 	}
-	public AsyncThreadOverflowException(String message, Throwable cause) {
-		super(message, cause);
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
 	}
 }

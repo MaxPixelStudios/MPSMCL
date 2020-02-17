@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -16,15 +16,13 @@
  */
 package cn.maxpixel.mpsmcl.ui;
 
-import cn.maxpixel.mpsmcl.configuration.LauncherSettings;
 import cn.maxpixel.mpsmcl.Main;
+import cn.maxpixel.mpsmcl.configuration.LauncherSettings;
 import cn.maxpixel.mpsmcl.ui.renderer.Window;
 import cn.maxpixel.mpsmcl.ui.renderer.javafx.JFXWindow;
 import cn.maxpixel.mpsmcl.ui.renderer.opengl.OGLWindow;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
-
-import java.io.File;
 
 import static cn.maxpixel.mpsmcl.LoggingConstants.APP_LAUNCHER;
 
@@ -33,8 +31,6 @@ public class Launcher {
 	public static Window window;
 
 	public void run() {
-		LogManager.getLogger("App Launcher/Initialize").debug("Releasing files");
-		new File(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource").mkdirs();
 		LogManager.getLogger(APP_LAUNCHER).info("Launching Application");
 		Window.running = true;
 		window = Main.configuration.getLauncherSettings().getRenderer() == LauncherSettings.Renderer.OPENGL ? new OGLWindow() : new JFXWindow();

@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@ package cn.maxpixel.mpsmcl;
 
 public interface LoggingConstants {
 	String SLASH = "/"; // '/'
+	String EXCEPTION_CAUGHT = "Exception Caught";
 
 	/* Main Constants */
 	String MAIN = "Main";
@@ -26,6 +27,7 @@ public interface LoggingConstants {
 
 	/* App Launcher Constants */
 	String APP_LAUNCHER = "App Launcher";
+	String INITIALIZE = "Initialize";
 
 	/* Window Constants */
 	String CLOSE = "Close";
@@ -33,4 +35,16 @@ public interface LoggingConstants {
 	/* OpenGL Window Constants */
 	String OPENGL_WINDOW_RENDERER = "OpenGL Window Renderer";
 	String LOAD_IMAGE = "Load Image";
+
+	/* JavaFX Window Constants */
+	String JAVAFX_WINDOW_RENDERER = "JavaFX Window Renderer";
+
+	/* Scene Manager Constants */
+	String SCENE_MANAGER = "Scene Manager";
+
+	/* Configuration Constants */
+	String CONFIGURATION = "Configuration";
+	String LOAD = "Load";
+	String SAVE = "Save";
+	String RESET = "Reset";
 }

@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -21,8 +21,10 @@ import java.util.function.IntConsumer;
 
 public class ArrayUtil {
 	public static <T> void forEach(T[] arr, Consumer<? super T> method) {
-		for(T o : arr) {
-			method.accept(o);
+		if(arr != null) {
+			for(T o : arr) {
+				method.accept(o);
+			}
 		}
 	}
 	public static void forEach(byte[] arr, Consumer<? super Byte> method) {

@@ -15,19 +15,10 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl;
+package cn.maxpixel.mpsmcl.ui.renderer.javafx.scene;
 
-public class AsyncThreadOverflowException extends RuntimeException {
-	public AsyncThreadOverflowException() {
-		super();
-	}
-	public AsyncThreadOverflowException(String message) {
-		super(message);
-	}
-	public AsyncThreadOverflowException(Throwable cause) {
-		super(cause);
-	}
-	public AsyncThreadOverflowException(String message, Throwable cause) {
-		super(message, cause);
-	}
+import javafx.scene.Scene;
+
+public interface Sceneable {
+	Scene getScene();
 }

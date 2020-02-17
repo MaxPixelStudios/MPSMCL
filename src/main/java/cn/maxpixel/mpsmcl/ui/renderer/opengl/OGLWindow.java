@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -52,25 +52,24 @@ public class OGLWindow extends Window {
 	private long window;
 	@Override
 	public void init() throws Exception {
-		LogManager.getLogger("App Launcher/Initialize").info("Started initialize");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).info("Started initialize");
 		errorCallback = GLFWErrorCallback.createThrow().set();
-		LogManager.getLogger("App Launcher/Initialize").trace("Created GLFW error callback throw");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("Created GLFW error callback throw");
 		if(!glfwInit()) throw new InitializeException("GLFW initialize failed", new RuntimeException("Initialize error"));
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		if(Platform.get() == Platform.MACOSX) glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-		LogManager.getLogger("App Launcher/Initialize").trace("Window hints has been set");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("Window hints has been set");
 		window = glfwCreateWindow(width, height,
 				Info.NAME + " version " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""), NULL, NULL);
 		if(window == NULL) {
 			glfwTerminate();
 			throw new InitializeException("Window created failed", new RuntimeException("Failed to create GLFW window"));
 		}
-		LogManager.getLogger("App Launcher/Initialize").trace("Created window");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("Created window");
 		glfwSetWindowIcon(window, GLFWImage.malloc(1).put(0, loadImage("icon/icon.png")));
-		LogManager.getLogger("App Launcher/Initialize").trace("Window icon set");
 		glfwSetWindowCloseCallback(window, l -> Window.running = false);
 		try(MemoryStack stack = stackPush()) {
 			IntBuffer wWidth = stack.callocInt(1);
@@ -80,21 +79,22 @@ public class OGLWindow extends Window {
 			glfwSetWindowPos(window,
 					(vidMode.width() - wWidth.get()) / 2,
 					(vidMode.height() - wHeight.get()) / 2);
-			LogManager.getLogger("App Launcher/Initialize").trace("Window position set");
+			LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("Window position set");
 			glfwShowWindow(window);
 		}
 		glfwMakeContextCurrent(window);
-		LogManager.getLogger("App Launcher/Initialize").trace("Make window context current");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("Make window context current");
 		glfwSwapInterval(1);
-		LogManager.getLogger("App Launcher/Initialize").info("V-Sync enabled");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).info("V-Sync enabled");
 		capabilities = GL.createCapabilities();
-		LogManager.getLogger("App Launcher/Initialize").trace("Capabilities created");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("Capabilities created");
 		GLdebugProc = GLUtil.setupDebugMessageCallback();
-		LogManager.getLogger("App Launcher/Initialize").trace("OpenGL debug message callback created");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("OpenGL debug message callback created");
 		glfwSetFramebufferSizeCallback(window, (window1, width, height) -> glViewport(0, 0, width, height));
-		LogManager.getLogger("App Launcher/Initialize").trace("GLFW frame buffer size callback has been set");
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("GLFW frame buffer size callback has been set");
 		float[] rgba = Main.configuration.getLauncherSettings().getBackgroundColor();
 		glClearColor(rgba[0], rgba[1], rgba[2],rgba[3]);
+		LogManager.getLogger(OPENGL_WINDOW_RENDERER + SLASH + INITIALIZE).trace("Background color set");
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class OGLWindow extends Window {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			glfwSwapBuffers(window);
-			glfwPollEvents();
+			glfwWaitEvents();
 		}
 	}
 

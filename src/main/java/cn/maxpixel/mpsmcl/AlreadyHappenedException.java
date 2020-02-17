@@ -17,17 +17,24 @@
 
 package cn.maxpixel.mpsmcl;
 
-public class AsyncThreadOverflowException extends RuntimeException {
-	public AsyncThreadOverflowException() {
+public class AlreadyHappenedException extends RuntimeException {
+	public AlreadyHappenedException() {
 		super();
 	}
-	public AsyncThreadOverflowException(String message) {
+
+	public AlreadyHappenedException(String message) {
 		super(message);
 	}
-	public AsyncThreadOverflowException(Throwable cause) {
+
+	public AlreadyHappenedException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public AlreadyHappenedException(Throwable cause) {
 		super(cause);
 	}
-	public AsyncThreadOverflowException(String message, Throwable cause) {
-		super(message, cause);
+
+	protected AlreadyHappenedException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

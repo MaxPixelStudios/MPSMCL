@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -17,12 +17,29 @@
 
 package cn.maxpixel.mpsmcl.ui.renderer.javafx;
 
+import cn.maxpixel.mpsmcl.Info;
+import cn.maxpixel.mpsmcl.ui.renderer.Window;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class JFXApp extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public void stop() throws Exception {
+		SceneManager.close();
+	}
 
+	@Override
+	public void start(Stage primaryStage) {
+		primaryStage.setTitle(Info.NAME + " version " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
+		primaryStage.setHeight(Window.height);
+		primaryStage.setWidth(Window.width);
+		primaryStage.setX(Window.x);
+		primaryStage.setY(Window.y);
+		primaryStage.setResizable(false);
+		SceneManager.create(primaryStage);
+		primaryStage.initStyle(StageStyle.UTILITY);
+
+		primaryStage.show();
 	}
 }

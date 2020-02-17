@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2019  MaxPixel Studios
+ *     Copyright (C) 2019-2020  MaxPixel Studios
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ import cn.maxpixel.mpsmcl.util.ArrayUtil;
 import cn.maxpixel.mpsmcl.configuration.Configuration;
 import cn.maxpixel.mpsmcl.util.Language;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.io.*;
@@ -32,6 +33,7 @@ public class Main {
 	public static Configuration configuration;
 	public static Language lang;
 	public static Launcher launcher;
+	private static final Logger LOGGER = LogManager.getLogger(MAIN);
 	static {
 		System.setProperty("log4j2.skipJansi", "false");
 		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
@@ -43,38 +45,32 @@ public class Main {
 			e.printStackTrace(new PrintWriter(writer, true));
 			writer.flush();
 			ArrayUtil.forEach(writer.toString().split("\n"), LogManager.getLogger("Main/Fatal Error Report")::fatal);
-			LogManager.getLogger("Main/Fatal Error Report").fatal("Please report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues");
-			LogManager.getLogger("Main/Fatal Error Report").fatal("If this error caused by you modified the program yourself, please don't report this.");
-			LogManager.getLogger("Main/Fatal Error Report").fatal("-----------------------------------------------------");
+			LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT).fatal("Please report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues");
+			LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT).fatal("If this error caused by you modified the program yourself, please don't report this.");
+			LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT).fatal("-----------------------------------------------------");
 			JOptionPane.showMessageDialog(null, "MaxPixel Studio's Minecraft Launcher has stopped because of a fatal error occur" +
-					"\nStacktrace: \n" + e + "\nPlease report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues\n" +
+					"\nStacktrace: \n" + writer + "\nPlease report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues\n" +
 					"If this error caused by you modified the program yourself, please don't report.", "MPSMCL FATAL ERROR REPORT",
 					JOptionPane.ERROR_MESSAGE);
 		});
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			File temp = new File(System.getProperty("user.home") + "/AppData/Roaming/.mpsmcl/resource");
-			if(temp.listFiles() != null) ArrayUtil.forEach(temp.listFiles(), File::delete);
-			temp.delete();
-			LogManager.getLogger(APP_LAUNCHER).debug("Temp file deleted");
-			LogManager.getLogger(APP_LAUNCHER).traceExit();
-		}, "Shutdown Thread"));
+		Runtime.getRuntime().addShutdownHook(Schedule.getSchedule().add(() -> LogManager.getLogger(APP_LAUNCHER).traceExit()).getThread());
 	}
 	public static void main(String[] args) {
-		LogManager.getLogger(MAIN).info("--------------------");
-		LogManager.getLogger(MAIN).info("MaxPixel Studios' Minecraft Launcher Starting...");
-		LogManager.getLogger(MAIN).info("Launcher Version: " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
-		LogManager.getLogger(MAIN).info("OS: " + System.getProperty("os.arch") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
-		LogManager.getLogger(MAIN).info("--------------------");
-		Configuration.resetConfiguration();
+		LOGGER.info("--------------------");
+		LOGGER.info("MaxPixel Studios' Minecraft Launcher Starting...");
+		LOGGER.info("Launcher Version: " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
+		LOGGER.info("OS: " + System.getProperty("os.arch") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+		LOGGER.info("--------------------");
 		configuration = Configuration.loadConfiguration();
-		LogManager.getLogger(MAIN).debug("Loaded configuration");
+		LOGGER.info("Loaded configuration");
 		lang = new Language();
-		LogManager.getLogger(MAIN).trace("Loaded language");
-		LogManager.getLogger(MAIN).debug("Running start task");
-		Schedule.getSchedule().add(() -> {
-			LogManager.getLogger(MAIN).debug("Checking for updates...");
-
-		}).runThread();
+		LOGGER.trace("Loaded language");
+		LOGGER.debug("Running start task");
+//		Schedule.getSchedule().add(() -> {
+//			LogManager.getLogger(MAIN).debug("Checking for updates...");
+//
+//		}).runThread();
+		Runtime.getRuntime().addShutdownHook(Schedule.getSchedule().add(() -> Configuration.saveConfiguration(configuration)).getThread());
 		launcher = new Launcher();
 		launcher.run();
 	}
