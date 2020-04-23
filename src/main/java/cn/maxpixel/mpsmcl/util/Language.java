@@ -67,7 +67,7 @@ public class Language {
 				LogManager.getLogger("Language System").error("Language name cannot be null!");
 				return "null";
 			} else if (langConfig.getProperty(langName) == null) {
-				LogManager.getLogger("Language System").error("Cannot find language name " + langName);
+				LogManager.getLogger("Language System").error("Cannot find language property " + langName);
 				return "null";
 			} else return langConfig.getProperty(langName);
 		} catch (Exception e) {

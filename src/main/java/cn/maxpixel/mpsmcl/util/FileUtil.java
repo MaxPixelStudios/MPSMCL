@@ -18,29 +18,38 @@ package cn.maxpixel.mpsmcl.util;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class FileUtil {
 	public static boolean checkExists(String fileName) {
 		LogManager.getLogger("File Utilities/File Exists Check").info("checking " + fileName);
-		return new File(fileName).exists();
+		return Files.exists(Paths.get(fileName));
 	}
 	public static boolean createNewFileFromStream(String fileName, InputStream resource) {
 		return createNewFileFromStream(fileName, resource, false);
 	}
 	public static boolean createNewFileFromStream(String fileName, InputStream resource, boolean override) {
+		final Logger CREATE_NEW_FILE = LogManager.getLogger("File Utilities/Create New File");
 		if((!checkExists(fileName)) || override) {
-			LogManager.getLogger("File Utilities/Create New File").trace("File not exists or override is true, creating file...");
+			CREATE_NEW_FILE.trace("File not exists or override is true, creating file...");
 			try {
-				LogManager.getLogger("File Utilities/Create New File").trace("Writing file...");
-				try(FileOutputStream target = new FileOutputStream(fileName)) {
-					for (int i = resource.read(); i != -1; i = resource.read()) target.write(i);
-					LogManager.getLogger("File Utilities/Create New File").trace("IO stream closing...");
-					resource.close();
+				CREATE_NEW_FILE.trace("Writing file...");
+				try(FileOutputStream target = new FileOutputStream(fileName);
+					FileChannel channel = target.getChannel();
+					InputStream resourceStream = resource;
+					ReadableByteChannel resourceChannel = Channels.newChannel(resourceStream)) {
+					channel.transferFrom(resourceChannel, 0, Long.MAX_VALUE);
+					CREATE_NEW_FILE.trace("IO stream closing...");
 				}
-				LogManager.getLogger("File Utilities/Create New File").debug("IO stream closed");
-				LogManager.getLogger("File Utilities/Create New File").info(fileName + " successful created");
+				CREATE_NEW_FILE.debug("IO stream closed");
+				CREATE_NEW_FILE.info(fileName + " successful created");
 				return true;
 			} catch (IOException e) {
 				LogManager.getLogger("File Utilities/Exception caught").error("IO error occurs");
@@ -48,7 +57,7 @@ public class FileUtil {
 				return false;
 			}
 		} else {
-			LogManager.getLogger("File Utilities/Create New File").warn("The " + fileName + " is already exists");
+			CREATE_NEW_FILE.warn("The " + fileName + " is already exists");
 			return false;
 		}
 	}

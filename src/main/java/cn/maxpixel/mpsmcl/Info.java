@@ -22,4 +22,5 @@ public interface Info {
 	String TEST_VERSION = "01";
 	String NAME = "MPSMCL";
 	String VERSION = "0.1";
+	String FULL_NAME = "MaxPixel Studios' Minecraft Launcher";
 }

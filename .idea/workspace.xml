@@ -2,34 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6b89927-59c1-4049-8a48-3d3ff37f34c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/AlreadyHappenedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/configuration/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/SceneManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/scene/HomeScene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/scene/Sceneable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/MaxPixelStudios.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copyright/MaxPixelStudios.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/scene/FXMLHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/scene/material/component/MaterialButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/material/Button.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/AsyncThreadOverflowException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/AsyncThreadOverflowException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/Info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/InitializeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/InitializeException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/LoggingConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/LoggingConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/UnknownLanguageException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/UnknownLanguageException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/configuration/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/game/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/configuration/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/configuration/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/configuration/LauncherSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/configuration/LauncherSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/game/GameDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/game/GameDirectory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/task/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/task/Schedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/task/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/JFXApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/JFXApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/JFXWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/JFXWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/opengl/OGLWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/opengl/OGLWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/util/ArrayUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/util/ArrayUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/SceneManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/scene/HomeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/ui/renderer/javafx/scene/material/HomeScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/util/FileUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/util/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/maxpixel/mpsmcl/util/Language.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/default-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/default-config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,17 +45,14 @@
     <option name="autoscrollToSource" value="true" />
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="MPSMCL" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="GLSL Shader" />
         <option value="AnnotationType" />
         <option value="JavaFXApplication" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
         <option value="FxmlFile" />
       </list>
     </option>
@@ -94,7 +79,6 @@
   <component name="ProjectId" id="1OXDn6RhOJ41a15NA0fYEXKXx00" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -103,6 +87,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563806641003" />
+    <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -113,10 +98,10 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="copyright" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.29821074" />
   </component>
   <component name="RecentsManager">
@@ -132,6 +117,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cn.maxpixel.mpsmcl.Main" />
       <module name="MPSMCL" />
+      <option name="VM_PARAMETERS" value="-Dlog4j2.skipJansi=false" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="cn.maxpixel.mpsmcl.ui.*" />
@@ -154,6 +140,12 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/src/main/resources/lib/netty-all-4.1.37.Final-sources.jar" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JAR Application.mpsmcl-0.1-a01-jar-with-dependencies.jar" />
+      <item itemvalue="JAR Application.MPSMCL-0.1-a01.jar" />
+      <item itemvalue="JAR Application.netty-all-4.1.37.Final-sources.jar" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -162,18 +154,6 @@
         <item itemvalue="JAR Application.netty-all-4.1.37.Final-sources.jar" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -277,7 +257,12 @@
       <workItem from="1581779039479" duration="5934000" />
       <workItem from="1581792173705" duration="6948000" />
       <workItem from="1581831580360" duration="25766000" />
-      <workItem from="1581931506489" duration="2283000" />
+      <workItem from="1581931506489" duration="16857000" />
+      <workItem from="1582175564807" duration="1201000" />
+      <workItem from="1582253849403" duration="3675000" />
+      <workItem from="1587583190161" duration="601000" />
+      <workItem from="1587583942448" duration="19000" />
+      <workItem from="1587583973844" duration="1825000" />
     </task>
     <task id="LOCAL-00001" summary="Task System Update">
       <created>1567865239801</created>
@@ -300,24 +285,30 @@
       <option name="project" value="LOCAL" />
       <updated>1580476221780</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Develop Update">
+      <created>1581944477206</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1581944477206</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Task System Update" />
@@ -333,6 +324,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="180" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1580028739926" />
+    <state x="552" y="178" key="#Intentions" timestamp="1582093226046">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Intentions/0.0.1920.1040@0.0.1920.1040" timestamp="1582093226046" />
     <state x="552" y="229" key="#Jetty_Server" timestamp="1580386150797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -341,6 +336,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="605" y="180" key="#Main/0.0.1920.1040@0.0.1920.1040" timestamp="1580057729390" />
+    <state x="440" y="94" key="#Project_Structure" timestamp="1587584297979">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1587584297979" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587583402270">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587583402270" />
     <state x="907" y="220" key="#com.intellij.ide.util.MemberChooser" timestamp="1581845451944">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -357,30 +360,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="696" y="387" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1581835930608" />
-    <state x="523" y="116" key="CommitChangelistDialog2" timestamp="1580476221043">
+    <state x="523" y="116" key="CommitChangelistDialog2" timestamp="1581944476476">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="523" y="116" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1580476221043" />
+    <state x="523" y="116" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581944476476" />
     <state x="740" y="263" key="FileChooserDialogImpl" timestamp="1580394913501">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="263" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580394913501" />
-    <state width="1877" height="340" key="GridCell.Tab.0.bottom" timestamp="1581928876819">
+    <state width="1877" height="247" key="GridCell.Tab.0.bottom" timestamp="1581998269470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581928876819" />
-    <state width="1877" height="340" key="GridCell.Tab.0.center" timestamp="1581928876819">
+    <state width="1877" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581998269470" />
+    <state width="1877" height="247" key="GridCell.Tab.0.center" timestamp="1581998269470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581928876819" />
-    <state width="1877" height="340" key="GridCell.Tab.0.left" timestamp="1581928876819">
+    <state width="1877" height="247" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581998269470" />
+    <state width="1877" height="247" key="GridCell.Tab.0.left" timestamp="1581998269470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581928876819" />
-    <state width="1877" height="340" key="GridCell.Tab.0.right" timestamp="1581928876819">
+    <state width="1877" height="247" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581998269470" />
+    <state width="1877" height="247" key="GridCell.Tab.0.right" timestamp="1581998269470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581928876819" />
+    <state width="1877" height="247" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581998269470" />
     <state width="1877" height="340" key="GridCell.Tab.1.bottom" timestamp="1581928876819">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -405,18 +408,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="662" y="238" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580134412536" />
-    <state x="87" y="205" width="984" height="711" key="SettingsEditor" timestamp="1581835819244">
+    <state x="316" y="226" width="984" height="711" key="SettingsEditor" timestamp="1587583593543">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="87" y="205" width="984" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1581835819244" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1580476228922">
+    <state x="316" y="226" width="984" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587583593543" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1581944482399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1580476228922" />
-    <state x="614" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1581792234471">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1581944482399" />
+    <state x="614" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1582253853723">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="614" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581792234471" />
+    <state x="614" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582253853723" />
     <state x="620" y="313" key="git4idea.merge.GitPullDialog" timestamp="1581944427567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

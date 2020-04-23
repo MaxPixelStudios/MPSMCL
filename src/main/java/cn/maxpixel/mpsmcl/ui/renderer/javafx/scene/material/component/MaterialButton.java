@@ -15,37 +15,12 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl.configuration;
+package cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.material.component;
 
-import com.google.gson.annotations.Expose;
+import javafx.scene.control.Button;
 
-public class Account {
-	public enum AccountType {
-		MOJANG,
-		OFFLINE
-	}
-	@Expose
-	private AccountType type;
-	@Expose
-	private String username;
-	@Expose
-	private String email;
-	@Expose
-	private String accessToken;
+public class MaterialButton extends Button {
+	public MaterialButton() {
 
-	public AccountType getAccountType() {
-		return type;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getAccessToken() {
-		return accessToken;
 	}
 }

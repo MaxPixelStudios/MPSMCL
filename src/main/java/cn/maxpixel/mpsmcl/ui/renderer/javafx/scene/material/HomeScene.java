@@ -15,31 +15,21 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl.ui.renderer.javafx;
+package cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.material;
 
-import cn.maxpixel.mpsmcl.ui.renderer.Window;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
+import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.Sceneable;
+import javafx.scene.Scene;
+import javafx.scene.layout.TilePane;
 
-import static cn.maxpixel.mpsmcl.LoggingConstants.*;
+public class HomeScene implements Sceneable {
+	private TilePane pane;
 
-public class JFXWindow extends Window {
-	private JFXApp window = new JFXApp();
-	@Override
-	public void init() throws Exception {
-		LogManager.getLogger(JAVAFX_WINDOW_RENDERER + SLASH + INITIALIZE).info("Started initialize");
+	public HomeScene() {
+		pane = new TilePane();
 	}
 
 	@Override
-	public void run() throws Exception {
-		Application.launch(window.getClass());
-		while(running) {}
-		close();
-	}
-
-	@Override
-	protected void close() throws Exception {
-		LogManager.getLogger(JAVAFX_WINDOW_RENDERER).debug("Closed window");
+	public Scene getScene() {
+		return new Scene(pane);
 	}
 }

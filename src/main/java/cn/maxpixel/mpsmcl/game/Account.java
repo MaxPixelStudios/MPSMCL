@@ -15,25 +15,37 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl.ui.renderer.javafx.scene;
+package cn.maxpixel.mpsmcl.game;
 
-import cn.maxpixel.mpsmcl.ui.renderer.javafx.SceneManager;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.TilePane;
+import com.google.gson.annotations.Expose;
 
-import java.io.IOException;
+public class Account {
+	public enum AccountType {
+		MOJANG,
+		OFFLINE
+	}
+	@Expose
+	private AccountType type;
+	@Expose
+	private String username;
+	@Expose
+	private String email;
+	@Expose
+	private String accessToken;
 
-public class HomeScene implements Sceneable {
-	private TilePane pane;
-
-	public HomeScene() {
-
-		pane = new TilePane();
+	public AccountType getAccountType() {
+		return type;
 	}
 
-	@Override
-	public Scene getScene() {
-		return new Scene(pane);
+	public String getUsername() {
+		return username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
 	}
 }

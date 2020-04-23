@@ -16,6 +16,7 @@
  */
 package cn.maxpixel.mpsmcl.configuration;
 
+import cn.maxpixel.mpsmcl.game.Account;
 import cn.maxpixel.mpsmcl.game.GameDirectory;
 import cn.maxpixel.mpsmcl.util.FileUtil;
 import com.google.gson.Gson;
@@ -55,14 +56,14 @@ public class Configuration {
 	public static Configuration loadConfiguration() {
 		FileReader fr = null;
 		try {
-			FileUtil.createNewFileFromStream("config.json", Configuration.class.getResourceAsStream("/default-config.json"));
+			FileUtil.createNewFileFromStream("config.json", Configuration.class.getClassLoader().getResourceAsStream("default-config.json"));
 			fr = new FileReader("config.json");
 			LogManager.getLogger(CONFIGURATION + SLASH + LOAD).debug("Loading configuration");
 			return json.fromJson(fr, Configuration.class);
 		} catch (FileNotFoundException e) {
 			LogManager.getLogger(CONFIGURATION + SLASH + EXCEPTION_CAUGHT).fatal("Configuration file not found!");
 			LogManager.getLogger(CONFIGURATION + SLASH + EXCEPTION_CAUGHT).catching(Level.FATAL, e);
-			FileUtil.createNewFileFromStream("config.json", Configuration.class.getResourceAsStream("/default-config.json"));
+			FileUtil.createNewFileFromStream("config.json", Configuration.class.getClassLoader().getResourceAsStream("default-config.json"));
 			return json.fromJson(fr, Configuration.class);
 		}
 	}

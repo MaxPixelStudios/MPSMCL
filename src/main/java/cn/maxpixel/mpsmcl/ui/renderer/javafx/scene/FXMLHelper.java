@@ -15,31 +15,21 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl.ui.renderer.javafx;
+package cn.maxpixel.mpsmcl.ui.renderer.javafx.scene;
 
-import cn.maxpixel.mpsmcl.ui.renderer.Window;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
-import static cn.maxpixel.mpsmcl.LoggingConstants.*;
+import java.io.IOException;
+import java.util.Objects;
 
-public class JFXWindow extends Window {
-	private JFXApp window = new JFXApp();
-	@Override
-	public void init() throws Exception {
-		LogManager.getLogger(JAVAFX_WINDOW_RENDERER + SLASH + INITIALIZE).info("Started initialize");
-	}
-
-	@Override
-	public void run() throws Exception {
-		Application.launch(window.getClass());
-		while(running) {}
-		close();
-	}
-
-	@Override
-	protected void close() throws Exception {
-		LogManager.getLogger(JAVAFX_WINDOW_RENDERER).debug("Closed window");
+public class FXMLHelper {
+	public static <T extends Parent> T forFxml(String path) {
+		try {
+			return FXMLLoader.load(Objects.requireNonNull(FXMLHelper.class.getClassLoader().getResource(path)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		throw new NullPointerException();
 	}
 }

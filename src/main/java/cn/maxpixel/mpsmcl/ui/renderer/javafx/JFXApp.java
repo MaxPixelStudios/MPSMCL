@@ -20,13 +20,17 @@ package cn.maxpixel.mpsmcl.ui.renderer.javafx;
 import cn.maxpixel.mpsmcl.Info;
 import cn.maxpixel.mpsmcl.ui.renderer.Window;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.Objects;
 
 public class JFXApp extends Application {
 	@Override
 	public void stop() throws Exception {
 		SceneManager.close();
+		Window.running = false;
 	}
 
 	@Override
@@ -37,9 +41,9 @@ public class JFXApp extends Application {
 		primaryStage.setX(Window.x);
 		primaryStage.setY(Window.y);
 		primaryStage.setResizable(false);
+		primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("icon/icon.png"))));
 		SceneManager.create(primaryStage);
-		primaryStage.initStyle(StageStyle.UTILITY);
-
+		primaryStage.initStyle(StageStyle.DECORATED);
 		primaryStage.show();
 	}
 }

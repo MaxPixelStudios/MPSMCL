@@ -18,7 +18,7 @@
 package cn.maxpixel.mpsmcl.ui.renderer.javafx;
 
 import cn.maxpixel.mpsmcl.AlreadyHappenedException;
-import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.HomeScene;
+import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.material.HomeScene;
 import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.Sceneable;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
