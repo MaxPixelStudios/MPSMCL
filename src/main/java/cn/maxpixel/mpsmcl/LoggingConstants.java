@@ -18,6 +18,7 @@
 package cn.maxpixel.mpsmcl;
 
 public interface LoggingConstants {
+	/* Shared Constants */
 	String SLASH = "/"; // '/'
 	String EXCEPTION_CAUGHT = "Exception Caught";
 
@@ -27,9 +28,9 @@ public interface LoggingConstants {
 
 	/* App Launcher Constants */
 	String APP_LAUNCHER = "App Launcher";
-	String INITIALIZE = "Initialize";
 
 	/* Window Constants */
+	String INITIALIZE = "Initialize";
 	String CLOSE = "Close";
 
 	/* OpenGL Window Constants */
@@ -39,7 +40,7 @@ public interface LoggingConstants {
 	/* JavaFX Window Constants */
 	String JAVAFX_WINDOW_RENDERER = "JavaFX Window Renderer";
 
-	/* Scene Manager Constants */
+	/* SceneManager Constants */
 	String SCENE_MANAGER = "Scene Manager";
 
 	/* Configuration Constants */
@@ -47,4 +48,17 @@ public interface LoggingConstants {
 	String LOAD = "Load";
 	String SAVE = "Save";
 	String RESET = "Reset";
+
+	/* FileUtil Constants */
+	String FILE_UTILITIES = "File Utilities";
+	String FILE_EXISTS_CHECK = "File Exists Check";
+	String CREATE_NEW_FILE = "Create New File";
+	String READ_FILE = "Read File";
+
+	/* Language Constants */
+	String LANGUAGE_SYSTEM = "Language System";
+
+	/* Task System Constants */
+	String TASK_SYSTEM = "Task System";
+	String SCHEDULE = "Schedule";
 }

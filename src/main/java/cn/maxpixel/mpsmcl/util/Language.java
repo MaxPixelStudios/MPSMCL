@@ -20,59 +20,63 @@ import cn.maxpixel.mpsmcl.Main;
 import cn.maxpixel.mpsmcl.UnknownLanguageException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
 
+import static cn.maxpixel.mpsmcl.LoggingConstants.*;
+
 public class Language {
-	private static Properties langConfig = new Properties();
+	private static final Properties langConfig = new Properties();
+	private static final Logger LANGUAGE_SYSTEM_LOGGER = LogManager.getLogger(LANGUAGE_SYSTEM);
 	public Language() {
 		try {
-			if(Main.configuration.getLanguage().equals("default")) {
-				Locale lang = Locale.getDefault();
-				LogManager.getLogger("Language System").trace("Default language has been select, finding your language");
+			if(Main.configuration.lang.equals("default")) {
+				final Locale lang = Locale.getDefault();
+				LANGUAGE_SYSTEM_LOGGER.debug("Default language has been select, finding your language...");
+				final ClassLoader loader = getClass().getClassLoader();
 				if(lang.equals(Locale.SIMPLIFIED_CHINESE)) {
-					LogManager.getLogger("Language System").debug("Your language is Chinese(Simplified), loading language file...");
-					langConfig.load(getClass().getResourceAsStream("/lang/zh_cn.properties"));
+					LANGUAGE_SYSTEM_LOGGER.debug("Your language is Chinese(Simplified), loading language file...");
+					langConfig.load(loader.getResourceAsStream("lang/zh_cn.properties"));
 				} else if(lang.equals(Locale.TRADITIONAL_CHINESE)) {
-					LogManager.getLogger("Language System").debug("Your language is Chinese(Traditional), loading language file...");
-					langConfig.load(getClass().getResourceAsStream("/lang/zh_tw.properties"));
+					LANGUAGE_SYSTEM_LOGGER.debug("Your language is Chinese(Traditional), loading language file...");
+					langConfig.load(loader.getResourceAsStream("lang/zh_tw.properties"));
 				} else if(lang.equals(Locale.US)) {
-					LogManager.getLogger("Language System").debug("Your language is English(US), loading language file...");
-					langConfig.load(getClass().getResourceAsStream("/lang/en_us.properties"));
+					LANGUAGE_SYSTEM_LOGGER.debug("Your language is English(US), loading language file...");
+					langConfig.load(loader.getResourceAsStream("lang/en_us.properties"));
 				} else {
-					LogManager.getLogger("Language System").debug("Couldn't find your language, using default language English(US), loading language file...");
-					langConfig.load(getClass().getClassLoader().getResourceAsStream("/lang/en_us.properties"));
+					LANGUAGE_SYSTEM_LOGGER.debug("Couldn't find your language, using default language English(US), loading language file...");
+					langConfig.load(loader.getResourceAsStream("lang/en_us.properties"));
 				}
-				LogManager.getLogger("Language System").trace("Language file has been loaded");
-			} else if(Main.configuration.getLanguage().equalsIgnoreCase("zh_cn") || Main.configuration.getLanguage().equalsIgnoreCase("zh_tw")
-					|| Main.configuration.getLanguage().equalsIgnoreCase("en_us")) {
-				LogManager.getLogger("Language System").debug("Selected language " + Main.configuration.getLanguage() + "loading language file...");
-				langConfig.load(getClass().getResourceAsStream("/lang/" + Main.configuration.getLanguage() + ".properties"));
-				LogManager.getLogger("Language System").trace("Language file has been loaded");
+				LANGUAGE_SYSTEM_LOGGER.trace("Language file has been loaded");
 			} else {
-				LogManager.getLogger("Language System/Exception caught").catching(Level.FATAL, new UnknownLanguageException("Language " +
-						Main.configuration.getLanguage() + " is not exists"));
+				final String languageId = Main.configuration.lang.toLowerCase().replace('-', '_');
+				try {
+					LANGUAGE_SYSTEM_LOGGER.debug("Selected language id \"" + languageId + "\". Loading language file...");
+					langConfig.load(getClass().getClassLoader().getResourceAsStream("lang/" + languageId + ".properties"));
+					LANGUAGE_SYSTEM_LOGGER.trace("Language file has been loaded");
+				} catch(NullPointerException npe) {
+					LogManager.getLogger("Language System/Exception caught").catching(Level.FATAL, new UnknownLanguageException("Language id \"" +
+							languageId+ "\" does not exist"));
+				}
 			}
 		} catch(IOException ioe) {
-			LogManager.getLogger("Language System/Exception caught").error("Error occurs");
-			LogManager.getLogger("Language System/Exception caught").catching(ioe);
+			LogManager.getLogger(LANGUAGE_SYSTEM + SLASH + EXCEPTION_CAUGHT).catching(ioe);
 		}
 	}
 	public String get(String langName) {
-		LogManager.getLogger("Language System").trace("Finding language properties value...");
+		LANGUAGE_SYSTEM_LOGGER.trace("Finding value of key \"{}\"...", langName);
 		try {
 			if (langName == null) {
-				LogManager.getLogger("Language System").error("Language name cannot be null!");
-				return "null";
+				LANGUAGE_SYSTEM_LOGGER.error("Language name cannot be null!");
 			} else if (langConfig.getProperty(langName) == null) {
-				LogManager.getLogger("Language System").error("Cannot find language property " + langName);
-				return "null";
+				LANGUAGE_SYSTEM_LOGGER.error("Cannot find language property " + langName);
 			} else return langConfig.getProperty(langName);
 		} catch (Exception e) {
-			LogManager.getLogger("Language System/Exception caught").catching(Level.WARN, e);
-			return "null";
+			LogManager.getLogger(LANGUAGE_SYSTEM + SLASH + EXCEPTION_CAUGHT).catching(Level.WARN, e);
 		}
+		return "null";
 	}
 }

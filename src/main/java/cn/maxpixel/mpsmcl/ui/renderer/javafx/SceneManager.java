@@ -17,7 +17,7 @@
 
 package cn.maxpixel.mpsmcl.ui.renderer.javafx;
 
-import cn.maxpixel.mpsmcl.AlreadyHappenedException;
+import cn.maxpixel.mpsmcl.AlreadyDoneException;
 import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.material.HomeScene;
 import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.Sceneable;
 import javafx.scene.Scene;
@@ -40,7 +40,7 @@ public class SceneManager {
 			return;
 		}
 		LOGGER.fatal("Error when creating SceneManager");
-		throw new AlreadyHappenedException("SceneManager already created");
+		throw new AlreadyDoneException("SceneManager already created");
 	}
 	private static void initScene() {
 		setScene(new HomeScene());
@@ -53,7 +53,7 @@ public class SceneManager {
 			return;
 		}
 		LOGGER.fatal("Error when closing SceneManager");
-		throw new AlreadyHappenedException("SceneManager already closed");
+		throw new AlreadyDoneException("SceneManager already closed");
 	}
 	public static void setScene(Sceneable scene) {
 		setScene(scene.getScene());
@@ -65,7 +65,7 @@ public class SceneManager {
 			return;
 		}
 		LOGGER.fatal("Error when set scene for stage");
-		throw new AlreadyHappenedException("SceneManager already closed");
+		throw new AlreadyDoneException("SceneManager already closed");
 	}
 	public static Stage getStage() {
 		return stage;

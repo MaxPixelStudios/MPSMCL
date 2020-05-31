@@ -29,7 +29,6 @@ import java.util.Objects;
 public class JFXApp extends Application {
 	@Override
 	public void stop() throws Exception {
-		SceneManager.close();
 		Window.running = false;
 	}
 

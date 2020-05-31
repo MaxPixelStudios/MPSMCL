@@ -15,19 +15,17 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl;
+package cn.maxpixel.mpsmcl.configuration;
 
-public class AsyncThreadOverflowException extends RuntimeException {
-	public AsyncThreadOverflowException() {
-		super();
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11C;
+
+public class RuntimeConfigurations {
+	public static void changeBackgroundColor(float red, float green, float blue, float alpha) {
+		GL11C.glClearColor(red, green, blue, alpha);
 	}
-	public AsyncThreadOverflowException(String message) {
-		super(message);
-	}
-	public AsyncThreadOverflowException(Throwable cause) {
-		super(cause);
-	}
-	public AsyncThreadOverflowException(String message, Throwable cause) {
-		super(message, cause);
+	public static void changeSwapInterval(int interval) {
+		if(interval < 0 || interval > 2) throw new IllegalArgumentException();
+		GLFW.glfwSwapInterval(interval);
 	}
 }

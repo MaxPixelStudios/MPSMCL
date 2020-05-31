@@ -23,18 +23,19 @@ import cn.maxpixel.mpsmcl.ui.renderer.javafx.JFXWindow;
 import cn.maxpixel.mpsmcl.ui.renderer.opengl.OGLWindow;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static cn.maxpixel.mpsmcl.LoggingConstants.APP_LAUNCHER;
 
 public class Launcher {
-
 	public static Window window;
+	private static final Logger LOGGER = LogManager.getLogger(APP_LAUNCHER);
 
 	public void run() {
-		LogManager.getLogger(APP_LAUNCHER).info("Launching Application");
+		LOGGER.info("Launching Application");
 		Window.running = true;
-		window = Main.configuration.getLauncherSettings().getRenderer() == LauncherSettings.Renderer.OPENGL ? new OGLWindow() : new JFXWindow();
-		LogManager.getLogger(APP_LAUNCHER).info("Using Window Renderer: {} Renderer", window instanceof OGLWindow ? "OpenGL" : "JavaFX");
+		window = Main.configuration.launcherSettings.renderer == LauncherSettings.Renderer.OPENGL ? new OGLWindow() : new JFXWindow();
+		LOGGER.info("Using Window Renderer: {} Renderer", window instanceof OGLWindow ? "OpenGL" : "JavaFX");
 		try {
 			window.init();
 			window.run();
@@ -44,9 +45,9 @@ public class Launcher {
 		}
 	}
 	private void exit() {
-		LogManager.getLogger(APP_LAUNCHER).info("--------------------");
-		LogManager.getLogger(APP_LAUNCHER).info("Exiting MaxPixel Studio's Minecraft Launcher");
-		LogManager.getLogger(APP_LAUNCHER).info("--------------------");
+		LOGGER.info("--------------------");
+		LOGGER.info("Exiting MaxPixel Studio's Minecraft Launcher");
+		LOGGER.info("--------------------");
 	}
 
 	public Window getWindow() {

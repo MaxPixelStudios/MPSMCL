@@ -16,12 +16,14 @@
  */
 package cn.maxpixel.mpsmcl.util;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 public class ArrayUtil {
 	public static <T> void forEach(T[] arr, Consumer<? super T> method) {
 		if(arr != null) {
+			Objects.requireNonNull(method);
 			for(T o : arr) {
 				method.accept(o);
 			}

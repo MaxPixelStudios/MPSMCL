@@ -17,24 +17,17 @@
 
 package cn.maxpixel.mpsmcl;
 
-public class AlreadyHappenedException extends RuntimeException {
-	public AlreadyHappenedException() {
+public class AsyncThreadException extends RuntimeException {
+	public AsyncThreadException() {
 		super();
 	}
-
-	public AlreadyHappenedException(String message) {
+	public AsyncThreadException(String message) {
 		super(message);
 	}
-
-	public AlreadyHappenedException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public AlreadyHappenedException(Throwable cause) {
+	public AsyncThreadException(Throwable cause) {
 		super(cause);
 	}
-
-	protected AlreadyHappenedException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
+	public AsyncThreadException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }

@@ -15,18 +15,26 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package cn.maxpixel.mpsmcl.configuration;
+package cn.maxpixel.mpsmcl;
 
-import com.google.gson.annotations.Expose;
+public class AlreadyDoneException extends RuntimeException {
+	public AlreadyDoneException() {
+		super();
+	}
 
-public class LauncherSettings {
-	@Expose
-	public float[] backgroundColor;
-	@Expose
-	public Renderer renderer;
+	public AlreadyDoneException(String message) {
+		super(message);
+	}
 
-	public enum Renderer {
-		OPENGL,
-		JAVAFX
+	public AlreadyDoneException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public AlreadyDoneException(Throwable cause) {
+		super(cause);
+	}
+
+	protected AlreadyDoneException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

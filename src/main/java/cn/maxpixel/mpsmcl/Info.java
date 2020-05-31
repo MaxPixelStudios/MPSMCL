@@ -20,6 +20,8 @@ public interface Info {
 	boolean IS_TEST_VERSION = true;
 	String TEST_PHASE = "a";
 	String TEST_VERSION = "01";
+	String PATCH_VERSION = "0";
+	boolean IS_PATCH_VERSION = false;
 	String NAME = "MPSMCL";
 	String VERSION = "0.1";
 	String FULL_NAME = "MaxPixel Studios' Minecraft Launcher";

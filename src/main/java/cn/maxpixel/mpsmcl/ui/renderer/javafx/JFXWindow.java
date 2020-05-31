@@ -41,5 +41,7 @@ public class JFXWindow extends Window {
 	@Override
 	protected void close() throws Exception {
 		LogManager.getLogger(JAVAFX_WINDOW_RENDERER).debug("Closed window");
+		SceneManager.close();
+		LogManager.getLogger(JAVAFX_WINDOW_RENDERER).debug("Closed SceneManager");
 	}
 }

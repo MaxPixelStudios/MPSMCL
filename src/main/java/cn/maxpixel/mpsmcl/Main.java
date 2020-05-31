@@ -16,16 +16,17 @@
  */
 package cn.maxpixel.mpsmcl;
 
+import cn.maxpixel.mpsmcl.configuration.Configuration;
 import cn.maxpixel.mpsmcl.task.Schedule;
 import cn.maxpixel.mpsmcl.ui.Launcher;
 import cn.maxpixel.mpsmcl.util.ArrayUtil;
-import cn.maxpixel.mpsmcl.configuration.Configuration;
 import cn.maxpixel.mpsmcl.util.Language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import static cn.maxpixel.mpsmcl.LoggingConstants.*;
 
@@ -42,7 +43,8 @@ public class Main {
 			FATAL_ERROR_REPORT_LOGGER.fatal("Error thread: " + t.getName());
 			FATAL_ERROR_REPORT_LOGGER.fatal("Stack trace:");
 			StringWriter writer = new StringWriter();
-			e.printStackTrace(new PrintWriter(writer, true));
+			try(PrintWriter pw = new PrintWriter(writer, true)){
+				e.printStackTrace(pw);}
 			writer.flush();
 			ArrayUtil.forEach(writer.toString().split("\n"), FATAL_ERROR_REPORT_LOGGER::fatal);
 			FATAL_ERROR_REPORT_LOGGER.fatal("Please report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues");
@@ -58,14 +60,15 @@ public class Main {
 	public static void main(String[] args) {
 		LOGGER.info("--------------------");
 		LOGGER.info(Info.FULL_NAME + " Starting...");
-		LOGGER.info("Launcher Version: " + Info.VERSION + (Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
+		LOGGER.info("Launcher Version: " + Info.VERSION +
+				(Info.IS_PATCH_VERSION ? "." + Info.PATCH_VERSION : "") +
+				(Info.IS_TEST_VERSION ? "-" + Info.TEST_PHASE + Info.TEST_VERSION : ""));
 		LOGGER.info("OS: " + System.getProperty("os.arch") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
 		LOGGER.info("--------------------");
 		configuration = Configuration.loadConfiguration();
 		LOGGER.info("Loaded configuration");
 		lang = new Language();
 		LOGGER.trace("Loaded language");
-		LOGGER.debug("Running start task");
 //		Schedule.getSchedule().add(() -> {
 //			LogManager.getLogger(MAIN).debug("Checking for updates...");
 //
