@@ -17,7 +17,6 @@
 package cn.maxpixel.mpsmcl.util;
 
 import it.unimi.dsi.fastutil.bytes.ByteArrayList;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,7 +33,7 @@ import static cn.maxpixel.mpsmcl.LoggingConstants.*;
 
 public class IOUtil {
 	public static boolean checkExists(String fileName) {
-		LogManager.getLogger(FILE_UTILITIES + SLASH + FILE_EXISTS_CHECK).info("checking " + fileName);
+		LogManager.getLogger(FILE_UTILITIES + SLASH + FILE_EXISTS_CHECK).debug("checking " + fileName);
 		return Files.exists(Paths.get(fileName));
 	}
 	public static boolean createNewFileFromStream(String fileName, InputStream resource) {
@@ -57,8 +56,7 @@ public class IOUtil {
 				return true;
 			} catch (IOException e) {
 				final Logger EXCEPTION_CAUGHT_LOGGER = LogManager.getLogger(FILE_UTILITIES + SLASH + EXCEPTION_CAUGHT);
-				EXCEPTION_CAUGHT_LOGGER.error("IO error occurs");
-				EXCEPTION_CAUGHT_LOGGER.catching(e);
+				EXCEPTION_CAUGHT_LOGGER.error("IO error occurs", e);
 				return false;
 			}
 		} else {
@@ -68,8 +66,8 @@ public class IOUtil {
 	}
 	public static String readStreamAsString(InputStream stream) {
 		final Logger READ_FILE_LOGGER = LogManager.getLogger(FILE_UTILITIES + SLASH + READ_FILE);
-		ByteArrayList list = new ByteArrayList();
 		try {
+			ByteArrayList list = new ByteArrayList();
 			READ_FILE_LOGGER.info("Reading file");
 			int len;
 			byte[] bytes = new byte[8192];
@@ -77,10 +75,10 @@ public class IOUtil {
 				list.addElements(list.size(), bytes, 0, len);
 			}
 			READ_FILE_LOGGER.debug("File read complete");
+			return new String(list.toByteArray());
 		} catch(IOException ioe) {
-			READ_FILE_LOGGER.warn("An error occurred when reading file");
-			READ_FILE_LOGGER.catching(Level.WARN, ioe);
+			READ_FILE_LOGGER.warn("An error occurred when reading file", ioe);
+			return "";
 		}
-		return new String(list.toByteArray());
 	}
 }

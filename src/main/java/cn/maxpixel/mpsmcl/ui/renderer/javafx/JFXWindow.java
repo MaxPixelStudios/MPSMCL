@@ -25,7 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import static cn.maxpixel.mpsmcl.LoggingConstants.*;
 
 public class JFXWindow extends Window {
-	private JFXApp window = new JFXApp();
+	private final JFXApp window = new JFXApp();
 	@Override
 	public void init() throws Exception {
 		LogManager.getLogger(JAVAFX_WINDOW_RENDERER + SLASH + INITIALIZE).info("Started initialize");

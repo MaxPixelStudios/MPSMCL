@@ -89,8 +89,8 @@ public class RenderEnvironment {
 			OPENGL_WINDOW_ERROR_LOGGER.fatal("Error code: {}", String.format("0x%X", error));
 			OPENGL_WINDOW_ERROR_LOGGER.fatal("Error description: {}", description);
 			OPENGL_WINDOW_ERROR_LOGGER.fatal("Stacktrace: {}", () -> {
-				StringBuilder builder = new StringBuilder();
-				ArrayUtil.forEach(Thread.currentThread().getStackTrace(), builder.append('\t').append('\t')::append);
+				StringBuilder builder = new StringBuilder().append('\n');
+				ArrayUtil.forEach(Thread.currentThread().getStackTrace(), builder.append('\t')::append);
 				return builder;
 			});
 			OPENGL_WINDOW_ERROR_LOGGER.fatal("--------------------");

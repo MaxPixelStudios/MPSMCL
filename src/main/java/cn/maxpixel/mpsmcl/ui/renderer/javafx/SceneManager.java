@@ -17,15 +17,14 @@
 
 package cn.maxpixel.mpsmcl.ui.renderer.javafx;
 
-import cn.maxpixel.mpsmcl.AlreadyDoneException;
-import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.material.HomeScene;
 import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.Sceneable;
+import cn.maxpixel.mpsmcl.ui.renderer.javafx.scene.material.HomeScene;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static cn.maxpixel.mpsmcl.LoggingConstants.*;
+import static cn.maxpixel.mpsmcl.LoggingConstants.SCENE_MANAGER;
 
 public class SceneManager {
 	private static boolean isWindowOpen;
@@ -40,7 +39,7 @@ public class SceneManager {
 			return;
 		}
 		LOGGER.fatal("Error when creating SceneManager");
-		throw new AlreadyDoneException("SceneManager already created");
+		throw new IllegalStateException("SceneManager already created");
 	}
 	private static void initScene() {
 		setScene(new HomeScene());
@@ -53,7 +52,7 @@ public class SceneManager {
 			return;
 		}
 		LOGGER.fatal("Error when closing SceneManager");
-		throw new AlreadyDoneException("SceneManager already closed");
+		throw new IllegalStateException("SceneManager already closed");
 	}
 	public static void setScene(Sceneable scene) {
 		setScene(scene.getScene());
@@ -65,7 +64,7 @@ public class SceneManager {
 			return;
 		}
 		LOGGER.fatal("Error when set scene for stage");
-		throw new AlreadyDoneException("SceneManager already closed");
+		throw new IllegalStateException("SceneManager already closed");
 	}
 	public static Stage getStage() {
 		return stage;

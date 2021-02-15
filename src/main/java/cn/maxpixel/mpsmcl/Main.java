@@ -39,13 +39,11 @@ public class Main {
 		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
 			final Logger FATAL_ERROR_REPORT_LOGGER = LogManager.getLogger(MAIN + SLASH + FATAL_ERROR_REPORT);
 			FATAL_ERROR_REPORT_LOGGER.fatal("-----------------------------------------------------");
-			FATAL_ERROR_REPORT_LOGGER.fatal(Info.FULL_NAME + " has stopped because of a fatal error occur");
+			FATAL_ERROR_REPORT_LOGGER.fatal(Info.FULL_NAME + " has stopped because of a fatal error occurred");
 			FATAL_ERROR_REPORT_LOGGER.fatal("Error thread: " + t.getName());
 			FATAL_ERROR_REPORT_LOGGER.fatal("Stack trace:");
 			StringWriter writer = new StringWriter();
-			try(PrintWriter pw = new PrintWriter(writer, true)){
-				e.printStackTrace(pw);}
-			writer.flush();
+			e.printStackTrace(new PrintWriter(writer, true));
 			ArrayUtil.forEach(writer.toString().split("\n"), FATAL_ERROR_REPORT_LOGGER::fatal);
 			FATAL_ERROR_REPORT_LOGGER.fatal("Please report this error to GitHub issue page: https://github.com/MaxPixelStudios/MPSMCL/issues");
 			FATAL_ERROR_REPORT_LOGGER.fatal("If this error caused by you modified the program yourself, please don't report this.");

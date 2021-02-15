@@ -23,26 +23,30 @@ import java.util.function.IntConsumer;
 public class ArrayUtil {
 	public static <T> void forEach(T[] arr, Consumer<? super T> method) {
 		if(arr != null) {
-			Objects.requireNonNull(method);
 			for(T o : arr) {
-				method.accept(o);
+				Objects.requireNonNull(method, "method cannot be null!").accept(o);
 			}
 		}
 	}
-	public static void forEach(byte[] arr, Consumer<? super Byte> method) {
-		for(byte b : arr) {
-			method.accept(b);
+	public static void forEach(byte[] arr, Consumer<Byte> method) {
+		if(arr != null) {
+			for(byte b : arr) {
+				Objects.requireNonNull(method, "method cannot be null!").accept(b);
+			}
 		}
 	}
-	public static void forEach(short[] arr, Consumer<? super Short> method) {
-		for(short s : arr) {
-			method.accept(s);
+	public static void forEach(short[] arr, Consumer<Short> method) {
+		if(arr != null) {
+			for(short s : arr) {
+				Objects.requireNonNull(method, "method cannot be null!").accept(s);
+			}
 		}
 	}
 	public static void forEach(int[] arr, IntConsumer method) {
-		for(int i : arr) {
-			method.accept(i);
+		if(arr != null) {
+			for(int i : arr) {
+				Objects.requireNonNull(method, "method cannot be null!").accept(i);
+			}
 		}
 	}
-
 }

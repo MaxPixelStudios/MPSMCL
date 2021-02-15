@@ -67,7 +67,7 @@ public class Language {
 		}
 	}
 	public String get(String langName) {
-		LANGUAGE_SYSTEM_LOGGER.trace("Finding value of key \"{}\"...", langName);
+		LANGUAGE_SYSTEM_LOGGER.trace("Finding value of key \"{}\" ...", langName);
 		try {
 			if (langName == null) {
 				LANGUAGE_SYSTEM_LOGGER.error("Language name cannot be null!");

@@ -28,13 +28,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static cn.maxpixel.mpsmcl.LoggingConstants.*;
 
 public class Schedule {
 	private static final Logger SCHEDULE_LOGGER = LogManager.getLogger(TASK_SYSTEM + SLASH + SCHEDULE);
 	private int count;
-	private int index;
+	private AtomicInteger index;
 	private ArrayList<Task> tasks;
 	private String name;
 	private Schedule(String name) {
@@ -42,7 +43,7 @@ public class Schedule {
 		tasks = new ArrayList<>();
 		this.name = name;
 		this.count = 0;
-		this.index = 0;
+		this.index = new AtomicInteger();
 	}
 	public static Schedule getSchedule() {
 		StringBuilder sb = new StringBuilder(40);
@@ -81,13 +82,17 @@ public class Schedule {
 			if((count - tpt * tcount) > 0) threads.add(new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
 				@Override
 				public void run() {
-					do tasks.get(index++).execute(); while(index < (count - tpt * tcount));
+					int i;
+					do {
+						i = index.getAndIncrement();
+						tasks.get(i).execute();
+					} while(i < (count - tpt * tcount));
 				}
 			});
 			do threads.add(new Thread(asyncThreads, "Schedule " + name + "_Asynchronous Thread" + threadNumber++) {
 				@Override
 				public void run() {
-					for(int i = 0; i < tpt; ++i) tasks.get(index++).execute();
+					for(int i = 0; i < tpt; ++i) tasks.get(index.getAndIncrement()).execute();
 				}
 			}); while(threadNumber <= tcount);
 
